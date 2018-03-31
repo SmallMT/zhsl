@@ -1,0 +1,76 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>企业认证信息</title>
+    <link rel="stylesheet" th:href="@{~/css/public.css}">
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" th:href="@{~/css/new_grzx_xgzhxx.css}">
+    <script th:src="@{~/js/jquery-1.4.2.min.js}"></script>
+    <link rel="stylesheet" th:href="@{~/css/new_grzx.css}">
+</head>
+    <form th:if="${companySize} != 0" th:object="${companyInfo}">
+        <div class="lanmu_list_main">
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg1.png) left no-repeat;" class="lanmu_sub1">
+                    认证状态：
+                </div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:field="*{state}"></span>
+                </div>
+            </div>
+            <div class="lanmu_list_sub">
+                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg7.png) left no-repeat;" class="lanmu_sub1">
+                    企业名称：
+                </div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:field="*{enterpriseName}"></span>
+                </div>
+            </div>
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg1.png) left no-repeat;" class="lanmu_sub1">
+                    法定代表人：
+                </div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:field="*{legalPersonName}"></span>
+                </div>
+            </div>
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg1.png) left no-repeat;" class="lanmu_sub1">
+                    身份证号码：
+                </div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:field="*{legalPersonId}"></span>
+                </div>
+            </div>
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg1.png) left no-repeat;" class="lanmu_sub1">
+                    移动电话：
+                </div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:field="*{legalPersonPhone}"></span>
+                </div>
+            </div>
+            <div class="lanmu_list_sub">
+                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg7.png) left no-repeat;" class="lanmu_sub1">
+                    统一社会信用代码：
+                </div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:field="*{creditCode}"></span>
+                </div>
+            </div>
+            <div class="sfzxx" style="margin-top:30px;height:250px;">
+                <div class="sfzxx_l" style="margin:0 auto;width:49%;height:200px">
+                    <span class="sfzxxmm">营业执照</span>
+                    <img th:src="@{~/user/certificationphoto(url=*{businessLicenseFile})}"
+                         alt="" width="100%" height="100%">
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+<!--<c:if test="${sessionScope.authStatus==null}">-->
+    <!--<%@include file="/WEB-INF/jsp/common/user/companyDafAuthentication.jsp"%>-->
+<!--</c:if>-->
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改信息</title>
+    <link rel="stylesheet" th:href="@{~/css/public.css}">
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" th:href="@{~/css/new_grzx_xgzhxx.css}">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="body_right_lanmu">
+            <div class="lanmu_tit_main">
+                <span class="lanmu_tit">账户信息</span>
+                <span class="lanmu_lasttime">
+           </span>
+            </div>
+            <form th:object="${info}" method="post">
+                <div class="lanmu_list_main">
+                    <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                        <div class="lanmu_sub1">
+                            用户名
+                        </div>
+                        <div class="lanmu_sub2">
+                            <span class="lanmu_sub2_1">
+                                <input type="text" class="form-control" name="username" disabled="disabled" th:field="*{username}"></span>
+                        </div>
+                    </div>
+                    <div class="lanmu_list_sub">
+                        <div class="lanmu_sub1">
+                            创建时间
+                        </div>
+                        <div class="lanmu_sub2">
+        <span class="lanmu_sub2_1">
+            <input type="text" class="form-control" name="ncname" th:field="*{createTime}" disabled="disabled">
+        </span>
+
+                        </div>
+
+                    </div>
+                    <div class="lanmu_list_sub">
+                        <div class="lanmu_sub1">
+                            手机号码
+                        </div>
+                        <div class="lanmu_sub2">
+                            <span class="lanmu_sub2_1">
+                                <input type="text" class="form-control" name="wap" disabled="disabled" th:field="*{tel}"></span>
+                        </div>
+
+                    </div>
+                    <div class="lanmu_list_sub">
+                        <div class="lanmu_sub1">
+                            实名认证
+                        </div>
+                        <div class="lanmu_sub2">
+                            <span class="lanmu_sub2_1">
+                                <input th:if="*{verified}" type="text" class="form-control" name="wap" disabled="disabled" value="已认证"></span>
+                                <input th:if="!*{verified}" type="text" class="form-control" name="wap" disabled="disabled" value="未认证"></span>
+                            </span>
+                        </div>
+                        <div class="lanmu_sub3">
+        <span class="lanmu_sub3_main">
+            <a th:if="!*{verified}" th:href="@{~/user/userauth(type='AFTER')}" target="_blank"  class="lanmu_sub3_shengji">我要认证</a>
+        </span>
+                        </div>
+                    </div>
+                    <div class="lanmu_list_sub">
+                        <div class="lanmu_sub2 bnt">
+        <span class="lanmu_sub2_1">
+        </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

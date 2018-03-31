@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>三亚政务服务中心——登录</title>
+    <link rel="stylesheet" th:href="@{~/css/login/public.css}">
+    <link rel="stylesheet" th:href="@{~/css/login/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/login/style.css}">
+    <script th:src="@{~/js/login/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{~/js/login/index_lqb.js}"></script>
+    <style>
+        .wrap3{height:380px;}
+    </style>
+    <link rel="stylesheet" th:href="@{~/css/login/promotion_index.css}">
+</head>
+<body>
+<div class="box_big">
+    <div class="wrap4">
+        <div class="head_main">
+            <div class="logo"><a href="javascript:;"><img th:src="@{/images/logo.png}"></a></div>
+        </div>
+    </div>
+    <div class="w wrap7">
+        <div class="pr dw">
+            <div class="Personal_login">
+                <ul class="menua">
+                    <li class="lia">个人用户登录</li>
+                    <li class="lia on">法人用户登录</li>
+                </ul>
+                <div class="mt80 form1" style="height:280px;display:block;">
+                    <form th:action="@{/user/dologin}" method="post" class="form-horizontal col-sm-offset-1 col-md-offset-1" id="register_form">
+                        <div class="col-sm-11 col-md-11">
+                            <div class="form-group">
+                                <i class="fa fa-user fa-lg"></i>
+                                <input class="form-control required" type="text" placeholder="用户名/手机号码/身份证" name="username" autofocus="autofocus"/>
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-lock fa-lg"></i>
+                                <input class="form-control required" type="password" placeholder="请输入密码" id="register_password" name="password"/>
+                            </div>
+                            <div class="form-group login_sign">
+                                <a class="fr" id="findpwd" href="">忘记密码？</a>
+                            </div>
+                            <div class="mt30 form-group login_sign">
+                                <input type="submit" class="btn btn-info pull-left" value="登录"/>
+                            </div>
+                            <font color="red" th:text="${msg}"></font>
+                        </div>
+                    </form>
+                </div>
+                <div class="mt80 form1" style="height:320px;display:none;">
+                    <form action="" method="post" class="form-horizontal col-sm-offset-1 col-md-offset-1">
+
+                        <div class="col-sm-11 col-md-11">
+                            <div class="form-group">
+                                <i class="fa fa-user fa-lg"></i>
+                                <input class="form-control required" type="text" placeholder="请输入用户名" name="username" autofocus="autofocus"/>
+                            </div>
+                            <div class="form-group">
+                                <i class="fa fa-lock fa-lg"></i>
+                                <input class="form-control required" type="password" placeholder="请输入密码" name="password"/>
+                            </div>
+                            <div class="form-group login_sign">
+                                <a class="fr" href="">忘记密码？</a>
+                            </div>
+                            <div class="mt30 form-group login_sign">
+                                <input type="submit" class="btn btn-info pull-left" value="登录"/>
+                            </div>
+                            <div class="form-group login_sign">
+                                <input type="submit" class="btn btn-info pull-left" value="法人数字证书登录"/>
+                            </div>
+                            <div class="form-group login_sign">
+                                <a class="fr" href="#">数字证书登录遇到问题？</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <a class="w zhuce" th:href="@{/user/register}">
+                    立即注册账号
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w wrap3">
+        <div class="pr dw">
+            <div class="foot_link">
+                <a href="javascript:void(0)" style="line-height:20px;">把本站设为首页</a>
+                <span style=" padding-left:12px; padding-right:12px;">|</span>
+                <a href="http://zwzx.sanya.gov.cn/">关于三亚政务服务网</a>
+                <span style=" padding-left:12px; padding-right:12px;">|</span>
+                <a href="http://zwzx.sanya.gov.cn/">本站申明</a>
+                <span style=" padding-left:12px; padding-right:12px;">|</span>
+                <a href="http://zwzx.sanya.gov.cn/">新手指南</a>
+                <span style=" padding-left:12px; padding-right:12px;">|</span>
+                <a href="http://zwzx.sanya.gov.cn/" target="_blank">联系我们</a>
+            </div>
+            <div class="foot_phone">
+                <img th:src="@{/images/new_phone.png}">
+            </div>
+            <div class="foot_copyright">
+                <span class="foot_spa">主办单位：三亚省人民政府办公厅</span>
+                <span class="foot_spa">ICP备案编号：琼ICP 备14000806号-1  版权所有</span>
+                <span class="foot_spa">
+		 		<a class="foot_linka"target="_blank" href="http://zwzx.sanya.gov.cn/">
+		 		<img th:src="@{/images/zjzwfw_batb.png}" style="float:left;">
+		 		<span class="foot_spa_ba">琼公网安备 33010602004556号</span></a>
+		 	</span><br>
+                <span class="foot_spa">中文域名：三亚政务服务政务</span>
+                <span class="foot_spa">建议使用1366*768分辨率/IE9.0或以上浏览器访问达到最佳效果</span>
+                <div class="foot_dzjgimg"><a href="" target=""><img th:src="@{/images/bglogo.png}" width="50" height="62"></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display: none" id="browser_ie">
+    <div class="brower_info">
+        <div class="notice_info">
+            <p><span style="color:#f00">三亚市政务服务中心提醒您</span>：<br>
+                你的浏览器版本过低，可能导致网站不能正常访问！<br>
+                为了你能正常使用网站功能，请使用这些浏览器。
+            </p>
+        </div>
+        <div class="browser_list">
+			<span>
+			<a href="https://www.baidu.com/s?wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8&rsv_spt=1&issp=1&f=8&rsv_bp=1&rsv_idx=2&ie=utf-8&tn=baiduhome_pg&rsv_enter=1&rsv_t=fc24RGsui6X1w8iw5EiQzM24xWburSywXJtAdtaiPr9WJLgUzWVGVizfMWg03lHNiud6&rsv_sug3=4&rsv_n=2&oq=E%3A\%E5%B7%A5%E4%BD%9C\TOPVE\UI\2015-08-28-%E6%94%B9%E7%89%88%E5%93%8D%E5%BA%94%E5%BC%8F\web&rsv_pq=a04d616100049196&bs=E%3A\%E5%B7%A5%E4%BD%9C\TOPVE\UI\2015-08-28-%E6%94%B9%E7%89%88%E5%93%8D%E5%BA%94%E5%BC%8F\web" target="_blank">
+			<img th:src="@{/images/Chrome.png}"><br>
+			谷歌浏览器
+			</a>
+			</span>
+            <span><a href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=2&tn=baiduhome_pg&wd=%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8&rsv_spt=1&oq=%25E8%25B0%25B7%25E6%25AD%258C%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8&rsv_pq=9f367f060001262d&rsv_t=0d64C%2FT%2B7nHTzPMPBmFhCt7q8XtYibp06vS%2BhtdcwDccMmf3BnTy4SEpIeC%2BRYOCIWjP&rqlang=cn&rsv_enter=1&rsv_sug3=1&rsv_sug1=1&rsv_sug7=100&rsv_sug2=0&inputT=2403&rsv_sug4=2404" target="_blank"><img th:src="@{/images/Firefox.png}"><br>
+			火狐浏览器
+			</a></span>
+            <span>
+                <a href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=2&tn=baiduhome_pg&wd=360%E6%B5%8F%E8%A7%88%E5%99%A8&rsv_spt=1&oq=%25E7%2581%25AB%25E7%258B%2590%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8&rsv_pq=ab937dfe0000a255&rsv_t=e198JDtrKC%2FMvK35rYXDUVGJ2Hp1cGfI%2F3SqGmD4O%2BUMhEvOtIsL0BsZjvNoZ%2BljPqbZ&rqlang=cn&rsv_enter=1&inputT=2403&rsv_sug3=3&rsv_sug1=2&rsv_sug7=100&bs=%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8" target="_blank"><img th:src="@{/images/360.png}"><br>
+			360浏览器
+			</a></span>
+            <span>
+                <a href="https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&rsv_idx=2&tn=baiduhome_pg&wd=Ie10%E6%B5%8F%E8%A7%88%E5%99%A8&rsv_spt=1&oq=Ie9%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8&rsv_pq=efcb8bfe00009fc5&rsv_t=1bbbDK2fVeLnwg75K1HcL%2FHAMLI2AiU5H2qBIs999beK9BvsJdXTBss3t9RM%2FCZjRjA4&rqlang=cn&rsv_enter=1&inputT=730&rsv_sug3=21&rsv_sug1=20&rsv_sug7=100&rsv_sug2=0&rsv_sug4=1303" target="_blank"><img th:src="@{/images/IE.png}"><br>
+			IE10及以上
+			</a></span>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    if (!$.support.leadingWhitespace) {
+        $("#browser_ie").show();
+        var sss = $("#browser_ie").css("display");
+        if(sss =="block"){
+            $(".box_big").css("display","none")
+        }else{
+            $(".box_big").css("display","block")
+        }
+    }
+
+</script>
+</body>
+</html>

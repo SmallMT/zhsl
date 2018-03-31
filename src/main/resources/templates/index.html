@@ -1,0 +1,101 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>三亚政务服务中心——个人中心</title>
+    <link rel="stylesheet" th:href="@{~/css/public.css}">
+    <link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <script th:src="@{~/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{~/js/bootstrap.min.js}"></script>
+    <script th:src="@{~/js/index_lqb.js}"></script>
+    <script th:src="@{~/js/index.js}"></script>
+    <style>
+        .wrap3{margin-top:125px;}
+        .pagination{margin:0;}
+    </style>
+</head>
+<body style="background:#f3f3f3">
+<div class="wrap4">
+    <div class="head_main">
+        <div class="head_tt"><a id="mh_name" target="_blank" href="http://zwzx.sanya.gov.cn/">三亚市政府门户网站</a></div>
+        <div class="logo"><a href="javascript:;"><img th:src="@{~/images/logo.png}"></a></div>
+    </div>
+</div>
+
+<div class="w wrap9">
+    <div class="pr dw">
+        <div class="local">
+            <span class="local_tag">当前位置：</span>
+            <span style=" font-size:14px; line-height:24px; color:#fff;">&gt;</span>
+            <span class="local_list">用户信息</span>
+        </div>
+    </div>
+</div>
+<div class="w wrap6">
+    <div class="pr dw">
+        <div class="fl mt20 item_lm">
+            <div class="fl item_l">
+
+                <div class="fl item_box" style="padding:0">
+                    <div class="item_iimg" style="border:none;">
+                        <img th:src="@{~/images/home_xmbp_blue.png}" alt="" class="imga">
+                        <div class="w item_name">
+                            <span>您好</span>
+                        </div>
+                        <div class="w item_jf">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="wdzh_info_main">
+                        <ul class="menua">
+                            <li class="w fl lia"><a href="javascript:;" onclick="selectItem(this)" id="sidebar_item_edit" class="link item 'active1'">账户信息</a>
+                            <li class="w fl lia"><a href="javascript:;" onclick="selectItem(this)" id="sidebar_item_rzbl" class="link item 'active2'}">办理认证</a>
+                            <li class="w fl lia"><a href="javascript:;" onclick="selectItem(this)" id="sidebar_item_rzzl" class="link item ${requestScope.number3==null?'':'active3'}">认证资料</a>
+                            <li class="w fl lia"><a href="javascript:;" onclick="selectItem(this)" id="sidebar_item_wdxm" class="link item ${requestScope.number4==null?'':'active4'}">我的办件</a>
+                            <li class="w fl lia"><a href="javascript:;" onclick="selectItem(this)" id="sidebar_item_tongjibiao" class="link item item ${requestScope.number6==null?'':'active5'}">统计报表</a>
+                            <li class="w fl lia"><a href="javascript:;" onclick="selectItem(this)" id="sidebar_item_zixun" class="link item item ${requestScope.number7==null?'':'active6'}">服务咨询</a>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="fr mt20 item_r" id="wrapper">
+            <iframe style="border: 0;width: 100%;min-height:730px;" src="" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+</div>
+<div class="cb mb20"></div>
+<div class="w wrap3">
+    <div class="pr dw">
+        <div class="foot_link">
+            <a href="javascript:void(0)" onclick="SetHome(this,window.location)" style="line-height:20px;">把本站设为首页</a>
+            <span style=" padding-left:12px; padding-right:12px;">|</span>
+            <a href="http://zwzx.sanya.gov.cn/">关于三亚政务服务网</a>
+            <span style=" padding-left:12px; padding-right:12px;">|</span>
+            <a href="http://zwzx.sanya.gov.cn/">本站申明</a>
+            <span style=" padding-left:12px; padding-right:12px;">|</span>
+            <a href="http://zwzx.sanya.gov.cn/">新手指南</a>
+            <span style=" padding-left:12px; padding-right:12px;">|</span>
+            <a href="http://zwzx.sanya.gov.cn/" target="_blank">联系我们</a>
+        </div>
+        <div class="foot_phone">
+            <img th:src="@{~/images/new_phone.png}">
+        </div>
+        <div class="foot_copyright">
+            <span style=" padding-right:15px; font-size:13px; line-height:24px; color:#666;">主办单位：三亚省人民政府办公厅</span>
+            <span style=" padding-right:15px; font-size:13px; line-height:24px; color:#666;">ICP备案编号：琼ICP 备14000806号-1  版权所有</span>
+            <span style=" padding-right:15px; font-size:13px; line-height:24px; color:#666;">
+		 		<a target="_blank" href="http://zwzx.sanya.gov.cn/" style="display:inline-block;text-decoration:none;line-height:24px;"><img th:src="@{~/images/zjzwfw_batb.png}" style="float:left;"><span style="font-size:13px;margin: 0px 0px 0px 5px;color:#666;">琼公网安备 33010602004556号</span></a>
+		 	</span><br>
+            <span style=" font-size:13px; line-height:24px; color:#666;">中文域名：三亚政务服务.政务</span>
+            <span style=" font-size:13px; line-height:24px; color:#666;">建议使用1366*768分辨率/IE9.0或以上浏览器访问达到最佳效果</span>
+            <div class="foot_dzjgimg"><a href="###" target=""><img th:src="@{/images/bglogo.png}" width="50" height="62"></a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

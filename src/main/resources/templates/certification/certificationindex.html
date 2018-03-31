@@ -1,0 +1,80 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>企业认证信息</title>
+    <link rel="stylesheet" th:href="@{~/css/public.css}">
+    <link rel="stylesheet" th:href="@{~css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" th:href="@{~/css/new_grzx_xgzhxx.css}">
+    <script th:src="@{~/js/jquery-1.4.2.min.js}"></script>
+    <style>
+        .lanmu_list_sub{height: 30px;}
+        .lanmu_sub1 {
+            width: 160px;
+            height: 30px;
+            padding-left: 30px;
+            position: absolute;
+            top: 0px;
+            left: 14px;
+            text-align: right;
+            font-size: 14px;
+            line-height: 30px;
+            color: #333;
+        }.lanmu_sub2 {
+             width: 380px;
+             height: 30px;
+             position: absolute;
+             top: 0px;
+             left: 184px;
+         }
+        .lanmu_sub2_1{margin-top:0;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="container">
+        <div class="lanmu_tit_main">
+            <span id="a2">企业认证信息</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span id="a1">个人实名认证信息</span>
+        </div>
+        <div class="body_right_lanmu" id="show2">
+            <!--企业认证信息-->
+            <div th:replace="certification/showCompanyInfo :: html"></div>
+        </div>
+        <div class="body_right_lanmu" id="show1">
+            <!--个人实名认证信息-->
+            <div th:replace="certification/showUserInfo :: html"></div>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script th:inline="javascript">
+    // 用户和管理员的切换
+    $(document).ready(function() {
+        $("#show1").hide();
+        $("#show2").show();
+        $("#a2").css("border-bottom","2px dashed");
+        $("#a2").css("font-weight","bold");
+        $("#a1").css("font-weight","normal");
+        $("#a1").click(function(){
+            $("#show1").show();
+            $("#show2").hide();
+            $("#a1").css("border-bottom","2px dashed");
+            $("#a2").css("border-bottom","");
+            $("#a1").css("font-weight","bold");
+            $("#a2").css("font-weight","normal");
+        });
+        $("#a2").click(function(){
+            $("#show2").show();
+            $("#show1").hide();
+            $("#a2").css("border-bottom","2px dashed");
+            $("#a1").css("border-bottom","");
+            $("#a2").css("font-weight","bold");
+            $("#a1").css("font-weight","normal");
+        });
+    })
+</script>
+</body>
+</html>

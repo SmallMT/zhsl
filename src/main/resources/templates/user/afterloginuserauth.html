@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>实名认证</title>
+    <link rel="stylesheet" th:href="@{~/css/interface/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{~/css/interface/public.css}">
+    <link rel="stylesheet" th:href="@{~/css/interface/style.css}">
+    <link rel="stylesheet" th:href="@{~/css/interface/gloab.css}" >
+    <link rel="stylesheet" th:href="@{~/css/interface/index.css}" >
+    <script th:src="@{~/js/interface/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{~/js/interface/authuser.js}"></script>
+</head>
+<body class="bgf4">
+<div class="fl w header_top">
+
+</div>
+<div class="login-box f-mt10 f-pb50">
+    <div class="main bgf">
+        <div class="reg-box-pan display-inline">
+            <div class="step">
+                <ul>
+                    <li class="col-xs-3 on">
+                        <span class="num"><em class="f-r5"></em><i>2</i></span>
+                        <!--<span class="line_bg lbg-l"></span>-->
+                        <!--<span class="line_bg lbg-r"></span>-->
+                        <p class="lbg-txt">实名认证</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="reg-box" id="verifyCheck" style="margin-top:20px;">
+                <form th:action="@{/user/douserauth(type='AFTER')}" method="post" th:object="${authUserVM}" enctype="multipart/form-data">
+                    <div class="part2" style="min-height:500px;display:block">
+                        <div class="item col-xs-12">
+                            <span class="intelligent-label f-fl"><b class="ftx04">*</b>姓名</span>
+                            <div class="f-fl item-ifo">
+                                <input type="text" maxlength="20" class="txt03 f-r3 required" id="username" name="trueName" onblur="checkName(this.value)" th:field="*{trueName}" tabindex="1" data-valid="isNonEmpty||between:1-20" data-error="姓名不能为空||姓名太长"   />
+                                <span class="ie8 icon-close close hide"></span>
+                                <label class="icon-sucessfill blank hide"></label>
+                                <label class="focus">
+                                    <span id="name">请输入您位身份证姓名</span>
+                                    <span id="afterchecktruename" th:if="${#fields.hasErrors('trueName')}">
+                                        <font color="red" th:errors="*{trueName}"></font>
+                                    </span>
+                                </label>
+                                <label class="focus valid"></label>
+                            </div>
+                        </div>
+                        <div class="item col-xs-12">
+                            <span class="intelligent-label f-fl"><b class="ftx04">*</b>身份证号码</span>
+                            <div class="f-fl item-ifo">
+                                <input type="text" maxlength="20" class="txt03 f-r3 required" id="code" name="trueID" onblur="checkTrueID(this.value)" th:field="*{trueID}" tabindex="1" data-valid="isNonEmpty||between:3-20||isUname" data-error="身份证号码不能为空||核对您的身份证是否有误||核对您的身份证是否有误"/>
+                                <span class="ie8 icon-close close hide"></span>
+                                <label class="icon-sucessfill blank hide"></label>
+                                <label class="focus">
+                                    <span id="idcard">请输入您位身份证</span>
+                                    <span id="afterchecktrueid" th:if="${#fields.hasErrors('trueID')}">
+                                        <font color="red" th:errors="*{trueID}"></font>
+                                    </span>
+                                </label>
+                                <label class="focus valid"></label>
+                            </div>
+                        </div>
+                        <div class="item col-xs-12">
+                            <span class="intelligent-label f-fl"><b class="ftx04">*</b>身份证正面</span>
+                            <div class="form-group" >
+                                <input  type="file" id="photoFornt" name="idCardFront">
+                            </div>
+                        </div>
+                        <div class="item col-xs-12">
+                            <span class="intelligent-label f-fl"><b class="ftx04">*</b>身份证反面</span>
+                            <div class="form-group">
+                                <input type="file"  id="photoRear" name="idCardBack">
+                            </div>
+                        </div>
+                        <div class="item col-xs-12">
+                            <font color="red" th:text="${msg}"></font>
+                        </div>
+                        <div class="item col-xs-12">
+                            <span class="intelligent-label f-fl">&nbsp;</span>
+                            <div class="f-fl item-ifo" style="margin-top:20px;">
+                                <button class="btn btn-blue f-r3" id="btn_part2">提交认证</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="m-sPopBg" style="z-index:998;"></div>
+<div class="m-sPopCon regcon">
+    <div class="m-sPopTitle"><strong>服务协议条款</strong><b id="sPopClose" class="m-sPopClose" onClick="closeClause()">×</b></div>
+    <div class="apply_up_content">
+    	<pre class="f-r0">
+		<strong>同意以下服务条款，提交注册信息</strong>
+        </pre>
+    </div>
+    <center><a class="btn btn-blue btn-lg f-size12 b-b0 b-l0 b-t0 b-r0 f-pl50 f-pr50 f-r3" href="javascript:closeClause();">已阅读并同意此条款</a></center>
+</div>
+<div class="container-fluid footer">
+    <p style="text-align:center;margin-top:10px;">办公地址：三亚市吉阳区新风街259号&nbsp;&nbsp;邮编：572000&nbsp;&nbsp;行政审批咨询电话：38860182&nbsp;&nbsp;&nbsp;公共资源交易咨询电话：38860923&nbsp;&nbsp;&nbsp;投诉电话：38860880</p>
+    <p>主办单位：三亚市人民政府政务服务中心  ICP备案编号：琼ICP 备14000806号-1  版权所有 未经许可不得复制  </p>
+    <span class="footer_spa"><a href="@" target="_blank"><img id="imgConac" vspace="0" hspace="0" border="0" th:src="@{~/images/blue.png}"></a></span>
+    <a target="_blank" href="#"><img th:src="@{~/images/jiucuo.png}"></a>
+    <div align="center" style="width:300px;margin:0 auto; padding:20px 0;"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=46020302000020" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="http://zwzx.sanya.gov.cn/images/ghs.png" style="float:left;"><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">琼公网安备 46020302000020号</p></a></div>
+</div>
+
+</body>
+</html>

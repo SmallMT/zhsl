@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <form method="post" th:if="${verify} == true" th:object="${userInfo}">
+        <div class="lanmu_list_main">
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div class="lanmu_sub1">姓名</div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1">
+                        <div  th:text="*{name}"></div>
+                    </span>
+                </div>
+            </div>
+            <div class="lanmu_list_sub">
+                <div class="lanmu_sub1">身份证号</div>
+                <div class="lanmu_sub2">
+                    <span class="lanmu_sub2_1" th:text="*{identity}">
+                    </span>
+                </div>
+            </div>
+            <div class="sfzxx" style="height:250px;">
+                <div class="sfzxx_l" style="float:left;width:49%;height:200px">
+                    <span class="sfzxxmm">身份证正面</span>
+                    <img th:src="@{/user/certificationphoto(url=*{frontImage})}" alt="" width="100%" height="100%">
+                </div>
+                <div class="sfzxx_r" style="float:right;height:200px;width:49%;">
+                    <span class="sfzxxmm">身份证反面</span>
+                    <img th:src="@{/user/certificationphoto(url=*{backImage})}" alt="" width="100%" height="100%">
+                </div>
+            </div>
+        </div>
+    </form>
+    <!--<c:if test="${sessionScope.personalInfo==null}">-->
+        <!--<%@include file="/WEB-INF/jsp/common/user/personalDafAuthentication.jsp"%>-->
+    <!--</c:if>-->
+    <div th:if="${verify} == false" th:replace="certification/showUserInfo :: html"></div>
+</html>

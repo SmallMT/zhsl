@@ -1,0 +1,196 @@
+body,html{padding:0;margin:0;  font-family: "微软雅黑",Arial,Verdana, Geneva, sans-serif;  color: #333;}
+.header_top{height:123px;background:url("../images/headerbg.jpg") repeat-x;}
+.nav-sidebar {
+
+    border: 1px solid #ccc;
+    margin-right: -21px;
+    margin-left: -20px;
+    min-height:800px;
+}
+.sidebar .menua .lia{text-align: center;border-bottom: 1px solid #ccc;}
+.menua .lia.active a{background:#428bca;color:#ffffff;}
+.nav-sidebar > .active > a:hover{
+    color: #fff;
+    background-color: #428bca;
+}
+.sidebar1{padding-right:0;}
+.wrap1 .wrap_top h3{height:40px;line-height:40px;border-bottom:1px dashed #ccc;margin-top:10px;}
+.wrap1 .wrap_addre{height:40px;line-height:40px;border-bottom: 1px solid #ccc;}
+.wrap1 .wrap_addre span{display: block;float: left;font-size:16px;}
+.wrap1 .wrap_addre .spa{width:30%;}
+.wrap1 .wrap_addre .spb{width:30%;}
+.wrap1 .wrap_addre .spc{width:40%;}
+.wrap1 .xtsjzs_top{ height:50px;line-height:50px;border-bottom: 1px solid #ccc;}
+.wrap1 .xtsjzs_top h3{margin:0;line-height:50px;}
+
+.wrap1 .xtsjzs_xx .menua .lia span{display: block;float:left;font-size:16px;}
+.wrap1 .xtsjzs_xx .menua .lia{
+    line-height:40px;
+    height:40px;}
+.wrap1 .xtsjzs_xx .menua .lia .spa{width:100px;text-align: right;}
+.wrap1 .xtsjzs_xx .menua .lia .spb{color: #c9302c;margin-right:10px;}
+.footer{text-align: center;    border-top: 3px solid #ccc;background: #f1f1f1;}
+.wrap2_top{margin-top:10px;}
+.dropload-down{width:100%;text-align: center;}
+.chakanbtn{color:#ffffff !important;}
+.seachbtn{ padding: 0;
+    background: none;
+    border: none;}
+/*登录样式 strat*/
+body.login {
+    background: url(../images/login_bgx.gif);
+}
+.login_m {
+    position: relative;
+    width: 403px;
+    margin: 50px auto 0;
+    height: 375px;
+}
+.login_error{font-size: 16px;font-weight:bold;color:#c9302c;text-align: center;}
+.login_boder {
+    background: url(../images/login_m_bg.png) no-repeat;
+    height: 302px;
+}
+.login_padding {
+    padding: 28px 47px 20px 47px;
+}
+.login_boder h2 {
+    color: #4f5d80;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: normal;
+    margin-bottom: 11px;
+}
+.login_boder input.txt_input2 {
+    margin-bottom: 20px;
+}
+.login_boder input.txt_input {
+    width: 295px;
+    height: 36px;
+    border: 1px solid #cad2db;
+    background: #f7f7f7;
+    padding: 0 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 36px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #717171;
+    font-family: Arial;
+}
+.rem_sub {
+    position: absolute;
+    left: 50%;
+    margin-left: -61px;
+
+}
+.rem_sub input.sub_button {
+    float: right;
+    width: 122px;
+    height: 32px;
+    background: #1b7ad4;
+    border-radius: 10px;
+    border: none;
+    color: #FFF;
+    padding-bottom: 2px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.select_box{
+    height: 35px;  }
+.page .pagination{margin:0 auto;}
+/*登录样式 end*/
+/*查看详情 css strap*/
+.item_box{width:700px;margin:0 auto;border: 1px solid #ccc;padding:10px 10px 0 10px;}
+.item_box .itemList{height:40px;line-height:40px;border-bottom: 1px dashed #ccc;font-size:16px;}
+.item_box .itemList:last-child{border-bottom:none;}
+.item_box .itemList .spa{display: block;float: left;}
+.item_box .itemList .spb{color:#c9302c;display: block;float:left;}
+.item_box .itemList .spb .input_box{height: 30px;}
+.body_right_lanmu {
+    width: 728px;
+    height: auto;
+    margin:0 auto 10px;
+    overflow: hidden;
+    position: relative;
+
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+}
+.lanmu_tit_main {
+    height: 40px;
+    padding-right: 14px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    line-height: 40px;
+    color: #1492FF;
+}
+.lanmu_tit {
+    display: block;
+    height: 40px;
+    padding-left: 14px;
+    padding-right: 16px;
+    float: left;
+    border-bottom: 2px solid #1492FF;
+    font-size: 18px;
+    line-height: 40px;
+    color: #1492FF;
+}
+.lanmu_list_sub {
+    height: 50px;
+    position: relative;
+    border-bottom: 1px solid #e8e8e8;
+}
+.lanmu_sub1 {
+    width: 160px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    left: 14px;
+    text-align: right;
+    font-size: 16px;
+    line-height: 50px;
+    color: #333;
+}
+.lanmu_sub2 {
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    left: 184px;
+}
+.lanmu_sub3 {
+    width: 210px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    right: 14px;
+}
+
+.lanmu_sub2_1 {
+    width: 100%;
+    display: inline;
+    float: left;
+    font-size: 16px;
+    overflow: hidden;
+    line-height: 30px;
+    margin-top: 10px;
+
+    height: 30px;
+}
+.sfzxx .sfzxxmm {
+    padding-left: 10px;
+    font-size: 14px;
+    display: block;
+    height: 40px;
+    color: #1492ff;
+    background: #badeff;
+    line-height: 40px;
+}
+.lanmu_list_suba{position: relative;}
+.lanmu_list_suba .lanmu_sub1a{float: left;
+    width: 173px;
+    text-align: right;}
+.lanmu_list_suba .lanmu_sub1a{float: left;}
+/*查看详情 css end*/
