@@ -1,5 +1,4 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
     <form method="post" th:if="${verify} == true" th:object="${userInfo}">
         <div class="lanmu_list_main">
             <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
@@ -32,5 +31,5 @@
     <!--<c:if test="${sessionScope.personalInfo==null}">-->
         <!--<%@include file="/WEB-INF/jsp/common/user/personalDafAuthentication.jsp"%>-->
     <!--</c:if>-->
-    <div th:if="${verify} == false" th:replace="certification/showUserInfo :: html"></div>
+    <!--<div th:if="${verify} == false" th:replace="certification/showUserInfo :: html"></div>-->
 </html>
