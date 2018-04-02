@@ -1,41 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <style>
+      .body_right_lanmu {
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          /*border: 1px solid #e7e7e7;*/
+          /*background-color: #fff;*/
+          height:420px;
+      }
 
-<style>
-    .body_right_lanmu {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
-        /*border: 1px solid #e7e7e7;*/
-        /*background-color: #fff;*/
-        height:420px;
-    }
+      .body_right_lanmu .item_l{width:48%;height: 200px;background: #1492FF;margin:100px auto 0;}
+      .body_right_lanmu .item_r{width:48%;height: 200px;background: #1072a2;margin:100px auto 0;}
+      .body_right_lanmu .item_r .linka{width: 100%;display: block;text-align: center;font-size: 32px;line-height: 200px;color:#ffffff;}
+      .body_right_lanmu .item_l .linka{width: 100%;
+          display: block;
+          text-align: center;
+          font-size: 32px;
+          line-height: 200px;
+          color: #fff;}
+  </style>
+  <body>
+  <div class="body_right_lanmu">
+          <div class="item_r"><a target="_blank" class="linka" id="qywrz">点击绑定企业</a></div>
+  </div>
+  </body>
 
-    .body_right_lanmu .item_l{width:48%;height: 200px;background: #1492FF;margin:100px auto 0;}
-    .body_right_lanmu .item_r{width:48%;height: 200px;background: #1072a2;margin:100px auto 0;}
-    .body_right_lanmu .item_r .linka{width: 100%;display: block;text-align: center;font-size: 32px;line-height: 200px;color:#ffffff;}
-    .body_right_lanmu .item_l .linka{width: 100%;
-        display: block;
-        text-align: center;
-        font-size: 32px;
-        line-height: 200px;
-        color: #fff;}
-</style>
-<body>
-<div class="body_right_lanmu">
-
-        <div class="item_r"><a target="_blank" class="linka" id="qywrz">去企业绑定</a></div>
-
-</div>
-<script type="application/javascript">
-    $(document).ready(function(){
-        $("#qywrz").click(function(){
-            if(${sessionScope.user.verified =="已认证"}){
-                if(${sessionScope.authStatus==null}){//该用户获取状态是空数据说明未认证
-                    window.open('${pageContext.request.contextPath}/user/newUserEditAuthentication.html?type=${myfn:encrypt("企业实名")}')
+  <script th:inline="javascript">
+        $(document).ready(function(){
+            $("#qywrz").click(function(){
+                if ([[${isCertification}]]) {
+                    window.open('/user/bindcompany?type=AFTER');
+                }else {
+                    alert('您未实名认证，请到个人实名认证填写资料');
                 }
-            }else {
-                alert('您未实名认证，请到个人实名认证填写资料')
-            }
-        });
-    })
-</script>
+            });
+        })
+  </script>
+
+</html>
 

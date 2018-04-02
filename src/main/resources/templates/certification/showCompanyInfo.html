@@ -11,10 +11,9 @@
 </head>
 <div class="body_right_lanmu" id="show2">
     <form th:if="${companySize} != 0" th:object="${companyInfo}">
-
         <div class="lanmu_list_main">
             <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
-                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg1.png) left no-repeat;" class="lanmu_sub1">
+                <div class="lanmu_sub1">
                     绑定新企业
                 </div>
                 <div class="lanmu_sub2">
@@ -30,7 +29,7 @@
                 </div>
             </div>
             <div class="lanmu_list_sub">
-                <div style="background:url(${pageContext.request.contextPath}/images/lanmu_sub1_bg7.png) left no-repeat;" class="lanmu_sub1">
+                <div class="lanmu_sub1">
                     企业名称：
                 </div>
                 <div class="lanmu_sub2">
@@ -79,9 +78,16 @@
             </div>
         </div>
     </form>
+    <form th:if="${companySize} == 0">
+        <div class="lanmu_list_main">
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div class="lanmu_sub1">
+                    绑定新企业
+                </div>
+                <div class="lanmu_sub2">
+                    <a class="lanmu_sub2_1" th:href="@{/user/bindcompany(type='AFTER')}" target="_blank">点我绑定新企业</a>
+                </div>
+            </div>
+    </form>
 </div>
-<!--<c:if test="${sessionScope.authStatus==null}">-->
-    <!--<%@include file="/WEB-INF/jsp/common/user/companyDafAuthentication.jsp"%>-->
-<!--</c:if>-->
-<div th:if="${companySize} == 0" th:replace="certification/companyDafAuthentication :: html"></div>
 </html>

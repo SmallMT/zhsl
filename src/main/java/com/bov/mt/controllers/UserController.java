@@ -260,11 +260,10 @@ public class UserController {
         //刷新用户信息
         User user = (User) request.getSession().getAttribute("user");
         String username = user.getLogin();
-        Token tokens = (Token) request.getSession().getAttribute("token");
-        String token = tokens.getToken();
+        String token = (String) request.getSession().getAttribute("token");
         Optional<User> optional = uaaUtils.getUserInfo(token,username);
         request.getSession().setAttribute("user",optional.get());
-        return "redirect:/user/editInfo";
+        return "redirect:/user/index";
     }
 
     //个人信息
@@ -339,4 +338,20 @@ public class UserController {
             logger.debug("==========获取实名认证或企业认证的图片失败===================");
         }
     }
+
+    //主页面中的认证选项
+    @GetMapping("certification")
+    public String certification(HttpServletRequest request,Model model){
+        //获取最新的用户信息
+        String token = (String)request.getSession().getAttribute("token");
+        User user = (User) request.getSession().getAttribute("user");
+        String username = user.getLogin();
+        User newUser = uaaUtils.getUserInfo(token,username).get();
+        int num = uaaUtils.bindingCompanyInfo(token,username).size();
+        //更新用户信息
+        request.getSession().setAttribute("user",newUser);
+        model.addAttribute("isCertification",newUser.isVerified());
+        return "certification/certification";
+    }
+
 }

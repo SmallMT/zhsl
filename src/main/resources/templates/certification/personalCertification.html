@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    .body_right_lanmu {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        /*border: 1px solid #e7e7e7;*/
+        /*background-color: #fff;*/
+        height:420px;
+    }
+
+    .body_right_lanmu .item_l{width:48%;    height: 200px;background: #1492FF;margin:100px auto 0;}
+    .body_right_lanmu .item_r{width:48%;height: 200px;background: #1072a2;margin:100px auto 0;}
+    .body_right_lanmu .item_r .linka{width: 100%;display: block;text-align: center;font-size: 32px;line-height: 200px;color: #ffffff}
+    .body_right_lanmu .item_l .linka{width: 100%;
+        display: block;
+        text-align: center;
+        font-size: 32px;
+        line-height: 200px;
+        color: #fff;}
+</style>
+<body>
+<div class="body_right_lanmu">
+    <div class="item_l"><a target="_blank" class="linka" id="grwrz">实名认证</a></div>
+</div>
+  <script th:inline="javascript">
+      $(document).ready(function(){
+          $("#grwrz").click(function(){
+              if(![[${isCertification}]]){
+                  if(confirm('去个人实名认证')){
+                      window.open('/user/userauth?type=AFTER')}
+              }else {
+                  alert("已实名认证，不能再修改");
+                  $("#grwrz").text("已实名认证");
+              }
+          });
+      })
+  </script>
+
+</html>

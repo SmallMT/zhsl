@@ -1,11 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
     <form method="post" th:if="${verify} == true" th:object="${userInfo}">
         <div class="lanmu_list_main">
             <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
                 <div class="lanmu_sub1">姓名</div>
                 <div class="lanmu_sub2">
                     <span class="lanmu_sub2_1">
-                        <div  th:text="*{name}"></div>
+                        <div th:text="*{name}"></div>
                     </span>
                 </div>
             </div>
@@ -28,8 +29,14 @@
             </div>
         </div>
     </form>
-    <!--<c:if test="${sessionScope.personalInfo==null}">-->
-        <!--<%@include file="/WEB-INF/jsp/common/user/personalDafAuthentication.jsp"%>-->
-    <!--</c:if>-->
-    <!--<div th:if="${verify} == false" th:replace="certification/showUserInfo :: html"></div>-->
+
+    <form method="post" th:if="${verify} == false">
+        <div class="lanmu_list_main">
+            <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
+                <div class="lanmu_sub1">还未实名认证？</div>
+                <div class="lanmu_sub2">
+                    <a th:href="@{~/user/userauth(type='AFTER')}">点我认证</a>
+                </div>
+            </div>
+    </form>
 </html>

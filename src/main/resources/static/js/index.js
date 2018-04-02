@@ -9,15 +9,14 @@ function selectItem(obj) {
         $('.active5').removeClass('active5');
         $('.active6').removeClass('active6');
     } else if (obj.id == 'sidebar_item_rzbl') {
-        $('#wrapper iframe').attr('src',"/user/certifacationindex");
+        $('#wrapper iframe').attr('src',"/user/certification");
         $('.active1').removeClass('active1');
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
         $('.active5').removeClass('active5');
         $('.active6').removeClass('active6');
-        $('.active6').removeClass('active7');
     }  else if (obj.id == 'sidebar_item_rzzl') {
-        $('#wrapper iframe').attr('src',"${pageContext.request.contextPath}/ouser/ousercertificationinfo.html");
+        $('#wrapper iframe').attr('src',"/user/certifacationindex");
         $('.active1').removeClass('active1');
         $('.active3').removeClass('active2');
         $('.active4').removeClass('active4');
@@ -48,7 +47,6 @@ function selectItem(obj) {
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
         $('.active6').removeClass('active5');
-        $('.active7').removeClass('active7');
     }
     else if (obj.id == 'sidebar_item_zixun') {//服务咨询
         $('.active1').removeClass('active1');
@@ -56,7 +54,6 @@ function selectItem(obj) {
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
         $('.active5').removeClass('active5');
-        $('.active6').removeClass('active6');
         $('#wrapper iframe').attr('src',"${pageContext.request.contextPath}/item/addzx.html");
     }
 }
