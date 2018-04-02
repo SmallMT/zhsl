@@ -306,10 +306,13 @@ public class UserController {
         model.addAttribute("verify",user.isVerified());
         if (companyInfoVMS.size() != 0) {
             model.addAttribute("companyInfo",companyInfoVMS.get(0));
+            request.getSession().setAttribute("companyInfos",companyInfoVMS);
         }
         if (user.isVerified()) {
             model.addAttribute("userInfo",userInfoVM);
         }
+        model.addAttribute("index",1);
+        request.getSession().setAttribute("size",companyInfoVMS.size());
         return "certification/certificationindex";
     }
 
@@ -347,11 +350,36 @@ public class UserController {
         User user = (User) request.getSession().getAttribute("user");
         String username = user.getLogin();
         User newUser = uaaUtils.getUserInfo(token,username).get();
-        int num = uaaUtils.bindingCompanyInfo(token,username).size();
         //更新用户信息
         request.getSession().setAttribute("user",newUser);
         model.addAttribute("isCertification",newUser.isVerified());
         return "certification/certification";
     }
 
+
+    //分页企业信息
+    @GetMapping("companypage")
+    public String companyInfoPage(@RequestParam("index") int index,@RequestParam("type") String type, HttpServletRequest request,Model model){
+
+        //获取绑定的企业信息
+        List<BindingCompanyInfoVM> companyInfos = (List<BindingCompanyInfoVM>) request.getSession().getAttribute("companyInfos");
+        switch (type) {
+            case "first" :
+                index = 1;
+                break;
+            case "last" :
+                index = companyInfos.size();
+                break;
+            case "before" :
+                index--;
+                break;
+            case "next" :
+                index ++;
+                break;
+        }
+        BindingCompanyInfoVM companyInfo = companyInfos.get(index-1);
+        model.addAttribute("companyInfo",companyInfo);
+        model.addAttribute("index",index);
+        return "certification/showCompanyInfo";
+    }
 }

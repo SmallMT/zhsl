@@ -10,7 +10,7 @@
     <script th:src="@{~/js/jquery-1.4.2.min.js}"></script>
 </head>
 <div class="body_right_lanmu" id="show2">
-    <form th:if="${companySize} != 0" th:object="${companyInfo}">
+    <form th:if="${session.size} != 0" th:object="${companyInfo}">
         <div class="lanmu_list_main">
             <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
                 <div class="lanmu_sub1">
@@ -78,7 +78,8 @@
             </div>
         </div>
     </form>
-    <form th:if="${companySize} == 0">
+
+    <form th:if="${session.size} == 0">
         <div class="lanmu_list_main">
             <div class="lanmu_list_sub" style="border-top: rgb(255, 255, 255);">
                 <div class="lanmu_sub1">
@@ -89,5 +90,23 @@
                 </div>
             </div>
     </form>
+
+    <div th:if="${session.size} != 0" class="page">
+        <ul class="menua">
+            <li class="lia">
+                <a th:href="@{/user/companypage(index=1,type='first')}" class="linka">首条</a>
+            </li>
+                <li class="lia">
+                    <a th:if="${index}!=1" th:href="@{/user/companypage(index=${index},type='before')}" class="linka">上个企业</a>
+                </li>
+                <li class="lia">
+                    <a th:if="${index} < ${session.size}" th:href="@{/user/companypage(index=${index},type='next')}" class="linka">下个企业</a>
+                </li>
+            <li class="lia">
+                <a th:href="@{/user/companypage(index=${session.size},type='last')}" class="linka">尾条</a>
+            </li>
+            <li class="lia">共 &nbsp; <text th:text="${session.size}"></text>&nbsp;条记录</li>
+        </ul>
+    </div>
 </div>
 </html>
