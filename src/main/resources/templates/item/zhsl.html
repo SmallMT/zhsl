@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>综合受理</title>
+	<link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+	<link rel="stylesheet" th:href="@{~/css/new_grzx.css}">
+    <script th:src="@{~/js/jquery-1.10.2.min.js}"></script>
+    <script th:src="@{~/css/bootstrap.min.css}"></script>
+    <script th:src="@{~/js/bootstrap.min.js}"></script>
+</head>
+<style>
+	.bjjl_wdbj_tongji {
+    height: 50px;
+    background-color: #E8F4FF;  
+}
+
+.body_right_lanmu {
+    width: 100%;
+
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+}
+.wdsc_tit_main{
+    height: 40px;
+    padding-right: 14px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    line-height: 40px;
+    float: left;
+    width: 100%;
+}
+.lanmu_tit {
+    display: block;
+    height: 40px;
+    padding-left: 14px;
+    padding-right: 16px;
+    float: left;
+    border-bottom: 2px solid #1492FF;
+    font-size: 18px;
+    line-height: 40px;
+    color: #1492FF;
+}
+.bjjl_list_sub{display: block;float: left;width: 100%;}
+.bjbnt .menu{width: 600px;
+    margin: 0 auto;}
+
+.bjbnt{background: #fff;
+    height: 110px;}
+.bjbnt .menu li a{float: left;
+    width: 100px;
+    text-align: center;
+    height: 100px;
+    background: #6bafea;
+    line-height: 100px;
+    border-radius: 50%;
+    margin:5px 23px;color:#fff;display: block;font-size: 16px;}
+.bjbnt .menu li a:hover{background: #1492FF;}
+.bjbnt .menu li a.on{background: #1492ff;}
+.lanmu1 .bjjl_wdbj_tit4{width:140px;}
+.lanmu1 .grzz_listtit5{width: 140px;
+    height: 50px;
+    float: left;
+    font-size: 14px;
+    line-height: 50px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;}
+
+</style>
+<body>
+<div class="bjbnt">
+  
+            <ul class="menu">
+                <li class="lia"><a href="javascript:;">个人办件</a></li>
+                <li class="lia"><a href="javascript:;">企业办件</a></li>
+                <li class="lia"><a href="javascript:;">受理部门</a></li>
+                <li class="lia"><a class="lia" th:href="@{/item/zhslindex(page=1)}">综合受理</a></li>
+            </ul>
+</div>
+    <span class="lanmu_lasttime" style="position: absolute;
+    top: 110px;
+    left: 0px;
+    z-index: 99;">
+              <span class="lanmu_tit" >综合受理</span>
+    </span>
+
+    <span class="lanmu_lasttime" style="position: absolute;
+    top: 119px;
+    left: 120px;
+    z-index: 99;">
+
+
+    </span>
+
+    <span class="lanmu_lasttime" style="position: absolute;
+    top: 114px;
+    left: 260px;
+    z-index: 99;">
+        <span class="seach">
+            <form th:action="@{/item/searchzhsl}" style="width:100%;" method="post">
+                <input class="inputseach"  placeholder="请输入您想找的办件名称" name="search" type="text">
+                <input class="submitBtn" type="submit" name="submit" value="搜索" style="">
+            </form>
+        </span>
+    </span>
+<div class="body_right_lanmu" id="sss" style="display:block;">
+ <div class="wdsc_tit_main"></div>
+    <div id="div1" class="bjjl_list_sub">
+        <div class="bjjl_wdbj_tongji">
+            <span style="padding-left: 14px; padding-right: 20px; font-size: 16px; line-height: 50px;"></span>
+            <span style="font-size: 16px; line-height: 50px;"></span>
+            <span style="padding-left: 45px; padding-right: 20px; font-size: 16px; line-height: 50px;"></span>
+            <span style="font-size: 16px; line-height: 50px;"></span>
+        </div>
+        <div class="bjjl_wdbj_tit1">序号</div>
+        <div class="bjjl_wdbj_tit2">办件名称</div>
+        <div class="bjjl_wdbj_tit3">事项编号</div>
+        <div class="bjjl_wdbj_tit4">受理部门</div>
+        <div class="bjjl_wdbj_tit6">操作</div>
+    </div>
+        <div >
+                <div class="grzz_listtit" th:each="item,iter : ${items}">
+                    <div class="grzz_listtit1" th:text="${iter.count}"></div>
+                    <div class="grzz_listtit2" th:text="${item.name}"></div>
+                    <div class="grzz_listtit4" th:text="${item.code}"></div>
+                    <div class="grzz_listtit5" th:text="${item.gsj}"></div>
+                    <div class="grzz_listtit6">
+                        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" th:value="${item.code}" onclick="popModal(this.value)">申报</button>
+                    </div>
+                </div>
+        </div>
+</div>
+
+<!--<div class="page">-->
+    <!--<ul class="menua">-->
+        <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/zhsl.html?page=1" class="linka">首页</a></li>-->
+        <!--<c:if test="${page.hasPrevious}">-->
+            <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/zhsl.html?page=${page.currentPage-1}" class="linka">上一页</a></li>-->
+        <!--</c:if>-->
+            <!--<li class="lia liafj">第<input class="default_pgCurrentPage" type="text" value="${page.currentPage}" title="页码"> 页 / 共 <span class="default_pgTotalPage">${page.totalPage}</span> 页</li>-->
+        <!--<c:if test="${page.hasNextPage}">-->
+            <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/zhsl.html?page=${page.currentPage+1}" class="linka">下一页</a></li>-->
+        <!--</c:if>-->
+        <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/zhsl.html?page=${page.totalPage}" class="linka">尾页</a></li>-->
+        <!--<li class="lia">共&nbsp;${page.totalCount}&nbsp;条记录</li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">请选择绑定的企业</h4>
+            </div>
+            <select id="companyid" th:each="">
+                <c:forEach items="${sessionScope.bindCompanyInfo.content}" var="companyInfo">
+                    <option value="${companyInfo.creditCode}">${companyInfo.enterpriseName}</option>
+                </c:forEach>
+            </select>
+            <input type="hidden" name="" value=""/>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="addBanjian()">确定</button>
+                <button type="button" class="btn btn-primary" onclick="addCompany()">新增企业</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:include="javascript">
+$(".lanmu_lasttime").click(function(){
+    $('.body_right_lanmu#sss').css("display","block")
+    $('.bjbnt .menu .lia').removeClass('on');
+    $('.lanmu1').css('display','none')
+})
+</script>
+
+<script th:include="javascript">
+    var code;
+    function popModal(obj){
+        code = obj;
+    }
+
+    function addBanjian(){
+        var select = document.getElementById("companyid");
+        var index = select.selectedIndex;
+        var companyCode = select.options[index].value;
+        var url = "${pageContext.request.contextPath}/item/addbanjian.html?code="+code+"&companyCode="+companyCode;
+        window.open(url);
+    }
+    function addCompany(){
+        window.open('${pageContext.request.contextPath}/user/bindcompanyhtml.html');
+    }
+
+</script>
+</body>
+</html>

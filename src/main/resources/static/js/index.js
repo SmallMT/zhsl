@@ -1,52 +1,41 @@
 function selectItem(obj) {
     $('.active.item').removeClass("active");
     obj.className += " active";
-    if (obj.id == 'sidebar_item_edit') {
+    if (obj.id == 'sidebar_item_edit') {//个人信息
         $('#wrapper iframe').attr('src','/user/editInfo');
         $('.active2').removeClass('active2');
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
         $('.active5').removeClass('active5');
         $('.active6').removeClass('active6');
-    } else if (obj.id == 'sidebar_item_rzbl') {
+    } else if (obj.id == 'sidebar_item_rzbl') {//认证
         $('#wrapper iframe').attr('src',"/user/certification");
         $('.active1').removeClass('active1');
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
         $('.active5').removeClass('active5');
         $('.active6').removeClass('active6');
-    }  else if (obj.id == 'sidebar_item_rzzl') {
+    }  else if (obj.id == 'sidebar_item_rzzl') {//认证信息
         $('#wrapper iframe').attr('src',"/user/certifacationindex");
         $('.active1').removeClass('active1');
-        $('.active3').removeClass('active2');
+        $('.active2').removeClass('active2');
         $('.active4').removeClass('active4');
         $('.active5').removeClass('active5');
         $('.active6').removeClass('active6');
-        $('.active7').removeClass('active7');
-
-    }else if (obj.id == 'sidebar_item_wdxm') {//我的项目
-        $('#wrapper iframe').attr('src',"${pageContext.request.contextPath}/item/mybanjian.html?page=1");
-        $('.active1').removeClass('active1');
-        $('.active2').removeClass('active2');
-        $('.active4').removeClass('active3');
-        $('.active5').removeClass('active5');
-        $('.active6').removeClass('active6');
-        $('.active7').removeClass('active7');
-    } else if (obj.id == 'sidebar_item_wdbj') { //我的办件
-        alert("此功能正在建设中");
+    }else if (obj.id == 'sidebar_item_wdbj') {//我的办件
+        $('#wrapper iframe').attr('src',"/item/banjian");
         $('.active1').removeClass('active1');
         $('.active2').removeClass('active2');
         $('.active3').removeClass('active3');
-        $('.active4').removeClass('active4');
+        $('.active5').removeClass('active5');
         $('.active6').removeClass('active6');
-        $('.active7').removeClass('active7');
-
     }else if (obj.id == 'sidebar_item_tongjibiao') {//统计报表
+        $('#wrapper iframe').attr('src',"/user/certifacationindex");
         $('.active1').removeClass('active1');
         $('.active2').removeClass('active2');
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
-        $('.active6').removeClass('active5');
+        $('.active6').removeClass('active6');
     }
     else if (obj.id == 'sidebar_item_zixun') {//服务咨询
         $('.active1').removeClass('active1');
@@ -54,6 +43,6 @@ function selectItem(obj) {
         $('.active3').removeClass('active3');
         $('.active4').removeClass('active4');
         $('.active5').removeClass('active5');
-        $('#wrapper iframe').attr('src',"${pageContext.request.contextPath}/item/addzx.html");
+        $('#wrapper iframe').attr('src',"");
     }
 }

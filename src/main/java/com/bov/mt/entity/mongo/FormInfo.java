@@ -1,15 +1,17 @@
 package com.bov.mt.entity.mongo;
 
+import org.bson.types.ObjectId;
+
 public class FormInfo {
-    private String _id;
+    private ObjectId _id;
     private String formId;
     private String formName;
 
-    public String get_id() {
+    public ObjectId get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(ObjectId _id) {
         this._id = _id;
     }
 
