@@ -159,10 +159,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">请选择绑定的企业</h4>
             </div>
-            <select id="companyid" th:each="">
-                <c:forEach items="${sessionScope.bindCompanyInfo.content}" var="companyInfo">
+            <select id="companyid">
+                <!--<c:forEach items="${sessionScope.bindCompanyInfo.content}" var="companyInfo">-->
                     <option value="${companyInfo.creditCode}">${companyInfo.enterpriseName}</option>
-                </c:forEach>
+                <!--</c:forEach>-->
             </select>
             <input type="hidden" name="" value=""/>
             <div class="modal-footer">

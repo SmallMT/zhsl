@@ -2,6 +2,7 @@ package com.bov.mt.entity.mongo;
 
 import org.bson.types.ObjectId;
 
+import java.util.Date;
 import java.util.Map;
 
 public class MYItemInfo {
@@ -12,7 +13,17 @@ public class MYItemInfo {
     private String code;
     private String name;
     private String gsj;
-    private String saveTime;
+    private Date saveTime;
+    private String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     private Map<String,String> data;
     private String dataId;
 
@@ -72,11 +83,11 @@ public class MYItemInfo {
         this.gsj = gsj;
     }
 
-    public String getSaveTime() {
+    public Date getSaveTime() {
         return saveTime;
     }
 
-    public void setSaveTime(String saveTime) {
+    public void setSaveTime(Date saveTime) {
         this.saveTime = saveTime;
     }
 

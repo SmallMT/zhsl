@@ -77,7 +77,7 @@
                 <li class="lia"><a href="javascript:;">企业办件</a></li>
                 <li class="lia"><a href="">受理部门</a></li>
                 <li class="lia">
-                    <a th:href="@{~/item/zhslindex(page=1)}" onclick="">综合受理</a>
+                    <a th:href="@{~/item/zhslindex(page=1)}" onclick="auth()">综合受理</a>
                 </li>
             </ul>
 </div>
@@ -120,11 +120,11 @@
         <div class="bjjl_wdbj_tit6">操作</div>
     </div>
         <div>
-            <div class="grzz_listtit">
-                <div class="grzz_listtit1">${status.count}</div>
-                <div class="grzz_listtit2">${item.name}</div>
-                <div class="grzz_listtit4">${item.gsj}</div>
-                <div class="grzz_listtit5">${item.savetime}</div>
+            <div class="grzz_listtit" th:each="item,iter : ${page.data}">
+                <div class="grzz_listtit1" th:text="${iter.count}"></div>
+                <div class="grzz_listtit2" th:text="${item.name}"></div>
+                <div class="grzz_listtit4" th:text="${item.gsj}"></div>
+                <div class="grzz_listtit5" th:text="${item.time}"></div>
                 <div class="grzz_listtit3">
                     <a href="" target="_blank">查看详情</a>
                 </div>
@@ -136,20 +136,20 @@
             </div>
         </div>
 </div>
-<!--<div class="page">-->
-    <!--<ul class="menua">-->
-        <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/mybanjian.html?page=1" class="linka">首页</a></li>-->
-        <!--<c:if test="${page.hasPrevious}">-->
-            <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/mybanjian.html?page=${page.currentPage-1}" class="linka">上一页</a></li>-->
-        <!--</c:if>-->
-            <!--<li class="lia liafj">第<input class="default_pgCurrentPage" type="text" value="${page.currentPage}" title="页码"> 页 / 共 <span class="default_pgTotalPage">${page.totalPage}</span> 页</li>-->
-        <!--<c:if test="${page.hasNextPage}">-->
-            <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/mybanjian.html?page=${page.currentPage+1}" class="linka">下一页</a></li>-->
-        <!--</c:if>-->
-        <!--<li class="lia"><a href="${pageContext.request.contextPath}/item/mybanjian.html?page=${page.totalPage}" class="linka">尾页</a></li>-->
-        <!--<li class="lia">共&nbsp;${page.totalCount}&nbsp;条记录</li>-->
-    <!--</ul>-->
-<!--</div>-->
+<div class="page">
+    <ul class="menua">
+        <li class="lia"><a th:href="@{/item/banjianpage(index=1)}" class="linka">首页</a></li>
+            <li class="lia" th:if="${page.hasPrevious}">
+                <a th:href="@{/item/banjianpage(index=(${page.currentPage}-1))}" class="linka">上一页</a>
+            </li>
+            <li class="lia liafj">第<input class="default_pgCurrentPage" type="text" th:value="${page.currentPage}" title="页码"> 页 / 共 <span class="default_pgTotalPage" th:text="${page.totalPage}"></span> 页</li>
+            <li class="lia" th:if="${page.hasNextPage}">
+                <a th:href="@{/item/banjianpage(index=(${page.currentPage}+1))}" class="linka">下一页</a>
+            </li>
+        <li class="lia"><a th:href="@{/item/banjianpage(index=${page.totalPage})}" class="linka">尾页</a></li>
+        <li class="lia" th:text="'共'+${page.totalCount} +'条记录'"></li>
+    </ul>
+</div>
 <script th:inline="javascript">
  $(".bjbnt .menu li a").click(function(){
     $(this).parents('.bjbnt .menu .lia').addClass("on").siblings().removeClass("on");
@@ -165,32 +165,22 @@ $(".lanmu_lasttime").click(function(){
     $('.lanmu1').css('display','none');
 });
 
- //非已实名和企业认证不给进综合受理（暂时）
-// function auth(){
-//    var zhsl = $("#zhsl");
-//    zhsl.removeClass("lia");
-//    zhsl.addClass("lia on");
-//    if(${sessionScope.user.verified=='已认证'}){
-//        if(${ sessionScope.authStatus.status_review=='已认证'}){
-//            return true;
-//        }
-//        if(${ sessionScope.authStatus.status_review=='审核中'}){
-//            alert('您的企业认证待审核中，通过才能办件');
-//            return false;
-//        }
-//        if(${ sessionScope.authStatus.status_review=='未通过'}){
-//            alert('企业认证失败，不能办件');
-//            return false;
-//        }
-//        if(${ sessionScope.authStatus==null}){//未认证
-//            alert('未认证企业，不能办件');
-//            return false;
-//        }
-//    }else {
-//        alert('你还未实名认证，不能办件');
-//        return false;
-//    }
-//}
+// 非已实名和企业认证不给进综合受理（暂时）
+ function auth(){
+    var zhsl = $("#zhsl");
+    zhsl.removeClass("lia");
+    zhsl.addClass("lia on");
+    if([[${session.user.verified}]]){
+        if([[${companySize}]] == 0){
+            alert('请您先绑定企业');
+            return false;
+        }
+        return true;
+    }else {
+        alert('你还未实名认证,不能办件,请先进行实名认证');
+        return false;
+    }
+}
 </script>
 </body>
 </html>

@@ -56,14 +56,19 @@ public class UserController {
         }
         String token = tokens.getToken();
         Optional<User> optional = uaaUtils.getUserInfo(token,username);
+        List<BindingCompanyInfoVM> companyInfoVMS = uaaUtils.bindingCompanyInfo(token, username);
+        //初始化用户信息
         request.getSession().setAttribute("token",token);
         request.getSession().setAttribute("user",optional.get());
+        request.getSession().setAttribute("companyInfos",companyInfoVMS);
         return "redirect:/user/index";
     }
 
     //用户主页面
     @GetMapping("index")
     public String index(){
+        //初始化用户信息
+
         return "index";
     }
 
@@ -125,8 +130,6 @@ public class UserController {
         }
         return url;
     }
-
-
 
     //进入用户实名认证页面
     @GetMapping("userauth")
@@ -356,11 +359,9 @@ public class UserController {
         return "certification/certification";
     }
 
-
     //分页企业信息
     @GetMapping("companypage")
     public String companyInfoPage(@RequestParam("index") int index,@RequestParam("type") String type, HttpServletRequest request,Model model){
-
         //获取绑定的企业信息
         List<BindingCompanyInfoVM> companyInfos = (List<BindingCompanyInfoVM>) request.getSession().getAttribute("companyInfos");
         switch (type) {
@@ -382,4 +383,5 @@ public class UserController {
         model.addAttribute("index",index);
         return "certification/showCompanyInfo";
     }
+
 }

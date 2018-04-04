@@ -6,6 +6,9 @@ import com.bov.mt.entity.mongo.ItemInfo;
 import com.bov.mt.entity.mongo.MYItemInfo;
 import com.bov.mt.entity.vm.BindingCompanyInfoVM;
 import com.bov.mt.service.mongodb.MongoService;
+import com.bov.mt.utils.ItemUtil;
+import com.bov.mt.utils.page.Page;
+import com.bov.mt.utils.page.PageFactory;
 import com.bov.mt.utils.uaa.UaaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -29,6 +33,8 @@ public class ItemController {
     private MongoService service;
     @Autowired
     private UaaUtil uaaUtil;
+    @Autowired
+    private ItemUtil itemUtil;
 
     @GetMapping("zhslindex")
     public String zhslIndex(HttpServletRequest request, Model model){
@@ -45,15 +51,39 @@ public class ItemController {
     }
 
     @GetMapping("banjian")
-    public String myItem(HttpServletRequest request){
+    public String myItem(HttpServletRequest request,Model model){
+        User user = (User) request.getSession().getAttribute("user");
+        String username = user.getLogin();
+        String token = (String) request.getSession().getAttribute("token");
+        //查询我的办件前五条
+        Query query = new Query();
+        query.addCriteria(Criteria.where("username").is(username));
+        int count = service.count(query,MongoTable.BANJIAN);
+        Page<MYItemInfo> page = PageFactory.getPage(1,5,count);
+        List<MYItemInfo> items = service.findByPage(page,query,MYItemInfo.class,MongoTable.BANJIAN);
+        itemUtil.dateToString(items);
+        page.setData(items);
+        model.addAttribute("page",page);
+        //获取绑定的企业个数
+        int companySize = uaaUtil.bindingCompanyInfo(token,username).size();
+        model.addAttribute("companySize",companySize);
+        return "item/mybanjian";
+    }
+
+    @GetMapping("banjianpage")
+    public String myItemPage(@RequestParam("index") int currentPage , HttpServletRequest request,
+                             Model model){
         User user = (User) request.getSession().getAttribute("user");
         String username = user.getLogin();
         //查询我的办件前五条
         Query query = new Query();
         query.addCriteria(Criteria.where("username").is(username));
-        query.skip(5);
-        List<MYItemInfo> items = template.find(query,MYItemInfo.class,MongoTable.BANJIAN);
-
+        int count = service.count(query,MongoTable.BANJIAN);
+        Page<MYItemInfo> page = PageFactory.getPage(currentPage,5,count);
+        List<MYItemInfo> items = service.findByPage(page,query,MYItemInfo.class,MongoTable.BANJIAN);
+        itemUtil.dateToString(items);
+        page.setData(items);
+        model.addAttribute("page",page);
         return "item/mybanjian";
     }
 }
