@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>我的办件--搜索</title>
+	<link rel="stylesheet" th:href="@{~/css/bootstrap.css}">
+	<link rel="stylesheet" th:href="@{~/css/new_grzx.css}">
+</head>
+<style>
+	.bjjl_wdbj_tongji {
+    height: 50px;
+    background-color: #E8F4FF;  
+}
+
+.body_right_lanmu {
+    width: 100%;
+
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #e7e7e7;
+    background-color: #fff;
+}
+.wdsc_tit_main{
+    height: 40px;
+    padding-right: 14px;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    line-height: 40px;
+    /*color: #1492FF;*/
+    float: left;
+    width: 100%;
+}
+.lanmu_tit {
+    display: block;
+    height: 40px;
+    padding-left: 14px;
+    padding-right: 16px;
+    float: left;
+    border-bottom: 2px solid #1492FF;
+    font-size: 18px;
+    line-height: 40px;
+    color: #1492FF;
+}
+.lanmu_lasttime{float:right;}
+.bjjl_list_sub{display: block;float: left;width: 100%;}
+.wdsc_tit_main .seach{    width: 320px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 30px;}
+.wdsc_tit_main .seach .inputseach{line-height: 32px;
+    height: 32px;
+    font-size: 14px;
+    float: left;
+    width: 270px;}
+.wdsc_tit_main .seach .submitBtn{
+    float: left;
+    width: 50px;
+    border: none;
+    background: #1492FF;
+    height: 32px;
+    line-height: 32px;
+    font-size: 14px;
+    color: #fff;
+}
+</style>
+<body>
+<div class="body_right_lanmu">
+    <div class="wdsc_tit_main">
+        <span class="lanmu_tit">我的办件</span>
+        <span class="seach">
+            <form th:action="@{~/item/searchbanjian}" style="width:100%;" method="post">
+                <input class="inputseach" placeholder="请输入想要查找的办件名称" name="search" type="text">
+                <input class="submitBtn" type="submit" name="submit" value="搜索" style="">
+            </form>
+        </span>
+    </div>
+	<div id="div1" class="bjjl_list_sub">
+		<div class="bjjl_wdbj_tongji">
+			<span style="padding-left: 14px; padding-right: 20px; font-size: 16px; line-height: 50px;">已搜索到</span>
+			<span style="font-size: 16px; line-height: 50px;" th:text="${count}"></span>
+			<span style="padding-left: 45px; padding-right: 20px; font-size: 16px; line-height: 50px;"></span>
+			<span style="font-size: 16px; line-height: 50px;"></span>
+		</div>
+		<div class="bjjl_wdbj_tit1">序号</div>
+		<div class="bjjl_wdbj_tit2">办件名称</div>
+		<div class="bjjl_wdbj_tit3">受理部门</div>
+		<div class="bjjl_wdbj_tit4">申报时间</div>
+		<div class="bjjl_wdbj_tit5">状态</div>
+		<div class="bjjl_wdbj_tit6">操作</div>
+	</div>
+	<div>
+            <div class="grzz_listtit" th:each="item,iter : ${page.data}">
+                <div class="grzz_listtit1" th:text="${iter.count}"></div>
+                <div class="grzz_listtit2" th:text="${item.name}"></div>
+                <div class="grzz_listtit4" th:text="${item.gsj}"></div>
+                <div class="grzz_listtit5" th:text="${item.time}"></div>
+                <div class="grzz_listtit3">
+                    <a target="_blank">查看详情</a>
+                </div>
+                <div class="grzz_listtit6">
+                    <a target="_self">申报</a>
+                    <a target="_blank">修改</a>
+                    <a target="_blank">查看</a>
+                </div>
+            </div>
+	</div>
+</div>
+<div class="page">
+    <ul class="menua">
+        <li class="lia">
+            <a th:href="@{/item/searchbanjianpage(search=${search},index=1)}" class="linka">首页</a>
+        </li>
+            <li class="lia" th:if="${page.hasPrevious}">
+                <a th:href="@{/item/searchbanjianpage(search=${search},index=(${page.currentPage}-1))}" class="linka">上一页</a>
+            </li>
+        <li class="lia liafj">第<input class="default_pgCurrentPage" type="text" th:value="${page.currentPage}" title="页码"> 页 / 共 <span class="default_pgTotalPage" th:text="${page.totalPage}"></span> 页</li>
+            <li class="lia" th:if="${page.hasNextPage}">
+                <a th:href="@{/item/searchbanjianpage(search=${search},index=(${page.currentPage}+1))}" class="linka">下一页</a>
+            </li>
+        <li class="lia"><a th:href="@{/item/searchbanjianpage(search=${search},index=${page.totalPage})}" class="linka">尾页</a></li>
+        <li class="lia" th:text="'共'+${page.totalCount}+'条记录'"></li>
+    </ul>
+</div>
+</body>
+</html>

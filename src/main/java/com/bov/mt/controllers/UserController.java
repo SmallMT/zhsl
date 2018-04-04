@@ -60,6 +60,7 @@ public class UserController {
         //初始化用户信息
         request.getSession().setAttribute("token",token);
         request.getSession().setAttribute("user",optional.get());
+        request.getSession().setAttribute("username",optional.get().getLogin());
         request.getSession().setAttribute("companyInfos",companyInfoVMS);
         return "redirect:/user/index";
     }
@@ -121,6 +122,7 @@ public class UserController {
         if (user.isPresent()) {
             //将用户信息放入session中
             request.getSession().setAttribute("user",user.get());
+            request.getSession().setAttribute("user",user.get().getLogin());
             request.getSession().setAttribute("token",token);
             //进入用户实名认证界面
             url = "redirect:/user/userauth?type=ING";

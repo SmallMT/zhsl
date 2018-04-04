@@ -97,7 +97,7 @@
     left: 260px;
     z-index: 99;">
         <span class="seach">
-            <form action="" style="width:100%;" method="post">
+            <form th:action="@{/item/searchbanjian}" style="width:100%;" method="post">
                 <input class="inputseach"  placeholder="请输入您想找的办件名称" name="search" type="text">
                 <input class="submitBtn" type="submit" name="submit" value="搜索" style="">
             </form>
@@ -129,9 +129,9 @@
                     <a href="" target="_blank">查看详情</a>
                 </div>
                 <div class="grzz_listtit6">
-                        <a href="" target="_self">申报</a>
-                        <a href="" target="_blank">修改</a>
-                        <a href="" target="_blank">查看</a>
+                    <a href="" target="_self">申报</a>
+                    <a href="" target="_blank">修改</a>
+                    <a href="" target="_blank">查看</a>
                 </div>
             </div>
         </div>

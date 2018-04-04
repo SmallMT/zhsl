@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -86,4 +87,42 @@ public class ItemController {
         model.addAttribute("page",page);
         return "item/mybanjian";
     }
+
+    @PostMapping("searchbanjian")
+    public String searchBanJian(HttpServletRequest request , Model model){
+        String search = request.getParameter("search").trim();
+        String username = (String) request.getSession().getAttribute("username");
+        Query query = new Query();
+        query.addCriteria(Criteria.where("username").is(username).and("name").regex(search));
+        int count = service.count(query,MongoTable.BANJIAN);
+        Page<MYItemInfo> page = PageFactory.getPage(1,5,count);
+        List<MYItemInfo> items = service.findByPage(page,query,MYItemInfo.class,MongoTable.BANJIAN);
+        itemUtil.dateToString(items);
+        page.setData(items);
+        model.addAttribute("page",page);
+        model.addAttribute("search",search);
+        model.addAttribute("count",count);
+        return "item/search";
+    }
+
+    @GetMapping("searchbanjianpage")
+    public String searchBanjianPage(HttpServletRequest request , Model model){
+        String search = request.getParameter("search").trim();
+        String currentPageStr = request.getParameter("index");
+        int currentPage = Integer.valueOf(currentPageStr);
+        String username = (String) request.getSession().getAttribute("username");
+        Query query = new Query();
+        query.addCriteria(Criteria.where("username").is(username).and("name").regex(search));
+        int count = service.count(query,MongoTable.BANJIAN);
+        Page<MYItemInfo> page = PageFactory.getPage(currentPage,5,count);
+        List<MYItemInfo> items = service.findByPage(page,query,MYItemInfo.class,MongoTable.BANJIAN);
+        itemUtil.dateToString(items);
+        page.setData(items);
+        model.addAttribute("page",page);
+        model.addAttribute("search",search);
+        model.addAttribute("count",count);
+        return "item/search";
+    }
+
+
 }
