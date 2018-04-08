@@ -74,27 +74,23 @@
 </style>
 <body>
 <div class="bjbnt">
-  
-            <ul class="menu">
-                <li class="lia"><a href="javascript:;">个人办件</a></li>
-                <li class="lia"><a href="javascript:;">企业办件</a></li>
-                <li class="lia"><a href="javascript:;">受理部门</a></li>
-                <li class="lia"><a class="lia" th:href="@{/item/zhslindex(page=1)}">综合受理</a></li>
-            </ul>
+    <ul class="menu">
+        <li class="lia"><a href="javascript:;">个人办件</a></li>
+        <li class="lia"><a href="javascript:;">企业办件</a></li>
+        <li class="lia"><a href="javascript:;">受理部门</a></li>
+        <li class="lia"><a class="lia" th:href="@{/item/zhslindex(page=1)}">综合受理</a></li>
+    </ul>
 </div>
     <span class="lanmu_lasttime" style="position: absolute;
     top: 110px;
     left: 0px;
     z-index: 99;">
-              <span class="lanmu_tit" >综合受理</span>
+      <span class="lanmu_tit" >综合受理</span>
     </span>
-
     <span class="lanmu_lasttime" style="position: absolute;
     top: 119px;
     left: 120px;
     z-index: 99;">
-
-
     </span>
 
     <span class="lanmu_lasttime" style="position: absolute;
@@ -171,7 +167,7 @@
     </div>
 </div>
 
-<script th:include="javascript">
+<script th:inline="javascript">
 $(".lanmu_lasttime").click(function(){
     $('.body_right_lanmu#sss').css("display","block")
     $('.bjbnt .menu .lia').removeClass('on');
@@ -179,7 +175,7 @@ $(".lanmu_lasttime").click(function(){
 })
 </script>
 
-<script th:include="javascript">
+<script th:inline="javascript">
     var code;
     function popModal(obj){
         code = obj;

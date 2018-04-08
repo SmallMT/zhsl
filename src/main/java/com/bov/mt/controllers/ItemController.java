@@ -105,6 +105,7 @@ public class ItemController {
         return "item/search";
     }
 
+    //分页查询我的办件信息
     @GetMapping("searchbanjianpage")
     public String searchBanjianPage(HttpServletRequest request , Model model){
         String search = request.getParameter("search").trim();
@@ -124,5 +125,19 @@ public class ItemController {
         return "item/search";
     }
 
-
+    //条件查询综合受理事项
+    @PostMapping("searchzhsl")
+    public String searchZHSL(HttpServletRequest request,Model model){
+        String username = (String) request.getSession().getAttribute("username");
+        String token = (String) request.getSession().getAttribute("token");
+        String search = request.getParameter("search").trim();
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").regex(search));
+        List<ItemInfo> items = template.find(query,ItemInfo.class,MongoTable.ITEMINFO);
+        //获取用户绑定企业信息
+        List<BindingCompanyInfoVM> infoVMS = uaaUtil.bindingCompanyInfo(token,username);
+        model.addAttribute("items",items);
+        model.addAttribute("companyInfoVMS",infoVMS);
+        return "item/zhsl";
+    }
 }
