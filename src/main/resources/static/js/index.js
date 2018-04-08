@@ -3,7 +3,7 @@ $(function(){
         $(".morem_box").find('label input').val('');
         $(".morem_box").hide();
 
-    })
+    });
     $(".zidingyi").click(function(){
         $(".morem_box").show();
     });
@@ -127,4 +127,4 @@ $(function(){
     });
 
 
-})
+});
