@@ -185,11 +185,11 @@ $(".lanmu_lasttime").click(function(){
         var select = document.getElementById("companyid");
         var index = select.selectedIndex;
         var companyCode = select.options[index].value;
-        var url = "${pageContext.request.contextPath}/item/addbanjian.html?code="+code+"&companyCode="+companyCode;
+        var url = "/item/addbanjian?code="+code+"&companyCode="+companyCode;
         window.open(url);
     }
     function addCompany(){
-        window.open('${pageContext.request.contextPath}/user/bindcompanyhtml.html');
+        window.open('/user/bindcompany?type=ING');
     }
 
 </script>

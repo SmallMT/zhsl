@@ -5,6 +5,7 @@ import com.bov.mt.entity.User;
 import com.bov.mt.entity.mongo.ItemInfo;
 import com.bov.mt.entity.mongo.MYItemInfo;
 import com.bov.mt.entity.vm.BindingCompanyInfoVM;
+import com.bov.mt.entity.vm.UserCertificationInfoVM;
 import com.bov.mt.service.mongodb.MongoService;
 import com.bov.mt.utils.ItemUtil;
 import com.bov.mt.utils.page.Page;
@@ -139,5 +140,25 @@ public class ItemController {
         model.addAttribute("items",items);
         model.addAttribute("companyInfoVMS",infoVMS);
         return "item/zhsl";
+    }
+
+    @GetMapping("addbanjian")
+    public String addBanJian(@RequestParam("code") String code,@RequestParam("companyCode") String companyCode,
+                             HttpServletRequest request,Model model){
+        //获取该code的事项名称
+        Query query = new Query();
+        query.addCriteria(Criteria.where("code").is(code));
+        ItemInfo itemInfo = template.findOne(query,ItemInfo.class,MongoTable.ITEMINFO);
+        String itemName = itemInfo.getName();
+        //获取用户选取的企业信息
+        String username = (String) request.getSession().getAttribute("username");
+        String token = (String) request.getSession().getAttribute("token");
+        BindingCompanyInfoVM vm = uaaUtil.bindingCompanyOneInfo(token,username,companyCode);
+        //获取用户实名认证信息
+        UserCertificationInfoVM userCertificationInfoVM = uaaUtil.realNameInfo(username,token);
+        model.addAttribute("companyInfo",vm);
+        model.addAttribute("name",itemName);
+        model.addAttribute("userCertificationInfo",userCertificationInfoVM);
+        return "item/forms/"+code;
     }
 }

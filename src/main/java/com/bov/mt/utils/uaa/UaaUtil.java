@@ -40,6 +40,7 @@ public class UaaUtil {
     private static final String UAA_BINDCOMPANY = "http://localhost:8089/api/account/bindEnterprise";//绑定企业
     private static final String UAA_GETBINDCOMPANYINFO = "http://localhost:8089/api/account/bindEnterprise?login.equals=";
     private static final String UAA_COMPANYLICENSEPHOTO = "http://localhost:8089/api/account/bindEnterprise/";
+//    http://localhost:8081/api/account/bindEnterprise?login.equals=lyt1025&creditCode.equals=444&state.equals=待验证
     private static final String UAA_GETBINDCOMPANYINFOBYCODE = "http://localhost:8089/api/account/bindEnterprise?";
 
     private Logger logger = LoggerFactory.getLogger(UaaUtil.class);
@@ -330,6 +331,28 @@ public class UaaUtil {
         return infoVMS;
     }
 
+    public BindingCompanyInfoVM bindingCompanyOneInfo(String token,String username,String companyCode){
+        OAuthHeader headers = new OAuthHeader();
+        headers.setAuthorization(token);
+        String url = UAA_GETBINDCOMPANYINFO + username + "&creditCode.equals="+ companyCode;
+        Optional<HttpClientResult> optional = postMan.getMethod(url, headers);
+        HttpClientResult httpClientResult = optional.get();
+        JSONObject result = JSONObject.fromObject(httpClientResult.getContent());
+        JSONArray companyInfos = result.getJSONArray("content");
+        BindingCompanyInfoVM vm = new BindingCompanyInfoVM();
+        JSONObject temp = companyInfos.getJSONObject(0);
+        vm.setId(temp.getInt("id"));
+        vm.setEnterpriseName(temp.getString("enterpriseName"));
+        vm.setCreditCode(temp.getString("creditCode"));
+        vm.setBusinessLicense(temp.getString("businessLicense"));
+        vm.setState(temp.getString("state"));
+        vm.setLegalPersonId(temp.getString("legalPersonId"));
+        vm.setLegalPersonName(temp.getString("legalPersonName"));
+        vm.setLegalPersonPhone(temp.getString("legalPersonPhone"));
+        vm.setEnterpriserAddress(temp.getString("enterpriserAddress"));
+        vm.setBusinessLicenseFile(temp.getString("businessLicenseFile"));
+        return vm;
+    }
     //获取认证的图片
     public byte[] certificationPhoto(String token,String url){
         return postMan.getImage(token,url);

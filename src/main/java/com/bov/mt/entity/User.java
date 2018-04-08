@@ -18,6 +18,7 @@ public class User {
     private String identity;
     private String name;
     private boolean verified;
+    private String tel;
 
     public String getFirstName() {
         return firstName;
@@ -59,7 +60,6 @@ public class User {
         this.weChat = weChat;
     }
 
-    private String tel;
 
     public int getId() {
         return id;
