@@ -4,6 +4,7 @@ import com.bov.mt.constant.MongoTable;
 import com.bov.mt.entity.User;
 import com.bov.mt.entity.mongo.ItemInfo;
 import com.bov.mt.entity.mongo.MYItemInfo;
+import com.bov.mt.entity.mongo.MetailInfo;
 import com.bov.mt.entity.vm.BindingCompanyInfoVM;
 import com.bov.mt.entity.vm.UserCertificationInfoVM;
 import com.bov.mt.service.mongodb.MongoService;
@@ -12,8 +13,11 @@ import com.bov.mt.utils.LangChaoService;
 import com.bov.mt.utils.page.Page;
 import com.bov.mt.utils.page.PageFactory;
 import com.bov.mt.utils.uaa.UaaUtil;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -21,8 +25,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +38,7 @@ import java.util.List;
 @RequestMapping("/item/")
 public class ItemController {
 
+    private Logger logger = LoggerFactory.getLogger(ItemController.class);
     @Autowired
     private MongoTemplate template;
     @Autowired
@@ -40,6 +49,7 @@ public class ItemController {
     private ItemUtil itemUtil;
     @Autowired
     private LangChaoService lc;
+
 
     @GetMapping("zhslindex")
     public String zhslIndex(HttpServletRequest request, Model model){
@@ -196,12 +206,76 @@ public class ItemController {
         banJian.put("saveTime",new Date());
         banJian.put("dataId",dataId);
         template.insert(banJian,MongoTable.BANJIAN);
-        return "yes";
+        return dataId;
     }
 
     @GetMapping("metails")
-    public String metails(HttpServletRequest request){
+    public String metails(@RequestParam("dataId") String dataId , HttpServletRequest request,Model model){
 
-        return "";
+        //根据dataId获取code
+        MYItemInfo myItemInfo = template.findOne(new Query().addCriteria(Criteria.where("dataId").is(dataId)),MYItemInfo.class,MongoTable.BANJIAN);
+        String itemCode = myItemInfo.getCode();
+        //获取材料信息
+        String metailStr = lc.getMetails(itemCode);
+        JSONArray array = JSONArray.fromObject(JSONObject.fromObject(metailStr).getString("ItemInfo"));
+        JSONArray metail = new JSONArray();
+        for (int i=0;i<array.size();i++) {
+            JSONObject metailUnit = new JSONObject();
+            JSONObject unit = array.getJSONObject(i);
+            metailUnit.put("id",unit.getString("CODE"));
+            metailUnit.put("name",unit.getString("NAME"));
+            metail.add(metailUnit);
+        }
+        model.addAttribute("metail",metail);
+        model.addAttribute("dataId",dataId);
+        model.addAttribute("code",itemCode);
+        return "item/metail";
+    }
+
+    @RequestMapping(value = "upanddisplay" ,method = RequestMethod.POST)
+    @ResponseBody
+    public String uploadItemMetailAndDisplay(@RequestParam("metail") MultipartFile multipartFile,@RequestParam("metailId") String metailId,
+                                             @RequestParam("dataId") String dataId,HttpServletRequest request,@RequestParam("itemCode") String itemCode){
+        Document metail = new Document();
+        String username = (String) request.getSession().getAttribute("username");
+        //先查找是否当前存在该材料id的doc
+        Query query = new Query();
+        query.addCriteria(Criteria.where("dataId").is(dataId).and("id").is(metailId));
+        MetailInfo metailInfoOld = template.findOne(query, MetailInfo.class,MongoTable.ITEMMETAIL);
+        String docid = JSONObject.fromObject(lc.upImage(multipartFile)).getString("docid");
+        metail.put("username",username);
+        metail.put("dataId",dataId);
+        metail.put("code",itemCode);
+        metail.put("metailId",metailId);
+        metail.put("upTime",new Date());
+        metail.put("docid",docid);
+        metail.put("uuid",docid);
+        if (metailInfoOld == null) {
+            //不存在则进行添加
+            template.insert(metail,MongoTable.ITEMMETAIL);
+        }else {
+            //存在，则进行更新
+            template.remove(query,MongoTable.ITEMMETAIL);
+            template.insert(metail,MongoTable.ITEMMETAIL);
+        }
+        JSONObject result = new JSONObject();
+        result.put("docid",docid);
+        result.put("metailId",metailId);
+        return result.toString();
+    }
+
+    @GetMapping("metailimage")
+    @ResponseBody
+    public void metailImage(@RequestParam("docid") String docid, HttpServletResponse response){
+        byte[] image = lc.loadImage(docid);
+        try{
+            OutputStream out = response.getOutputStream();
+            out.write(image);
+            out.flush();
+            out.close();
+        }catch (IOException e) {
+            logger.debug("=========输出材料图片失败========");
+        }
+
     }
 }
