@@ -41,7 +41,7 @@
         }
 
         .btn_addPic em {
-            background:url(${pageContext.request.contextPath}/images/add.png) 0 0;
+            background:url(/images/add.png) 0 0;
             display: inline-block;
             width: 18px;
             height: 18px;
@@ -69,7 +69,7 @@
             left: 50%;
             margin-left: -300px;
             width: 520px;
-            background: #eee url(${pageContext.request.contextPath}/images/modal-gloss.png) no-repeat -200px -80px;
+            background: #eee url(/images/modal-gloss.png) no-repeat -200px -80px;
             position: absolute;
             z-index: 101;
             padding: 30px 40px 34px;
@@ -130,7 +130,7 @@
         </tr>
     </tbody>
 </table>
-<a class="linkaBtn" href="">确定</a>
+<a class="linkaBtn" th:href="@{/user/index}">确定</a>
 <div class="niubi" style="opacity: 1;top: 100px;visibility: hidden;">
     <form id="f" action="" method="post" enctype="multipart/form-data" class="file_form">
         <a href="javascript:void(0);" class="btn_addPic"><span><em>+</em>添加图片</span>

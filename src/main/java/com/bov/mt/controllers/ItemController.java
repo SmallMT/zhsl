@@ -240,7 +240,7 @@ public class ItemController {
         String username = (String) request.getSession().getAttribute("username");
         //先查找是否当前存在该材料id的doc
         Query query = new Query();
-        query.addCriteria(Criteria.where("dataId").is(dataId).and("id").is(metailId));
+        query.addCriteria(Criteria.where("dataId").is(dataId).and("metailId").is(metailId));
         MetailInfo metailInfoOld = template.findOne(query, MetailInfo.class,MongoTable.ITEMMETAIL);
         String docid = JSONObject.fromObject(lc.upImage(multipartFile)).getString("docid");
         metail.put("username",username);
