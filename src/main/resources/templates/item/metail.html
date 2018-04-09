@@ -1,0 +1,266 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+    <!--<title></title>-->
+    <!--<link href="${pageContext.request.contextPath}/js/cform.css" rel="stylesheet">-->
+    <!--<script src="${pageContext.request.contextPath}/js/jquery-1.11.1.js"></script>-->
+    <!--<%&#45;&#45;<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>&#45;&#45;%>-->
+    <!--<script src="${pageContext.request.contextPath}/js/WdatePicker.js"></script>-->
+    <!--&lt;!&ndash;序列化表单转JSON格式&ndash;&gt;-->
+    <!--<script src="${pageContext.request.contextPath}/js/jquery.serializejson.js"></script>-->
+    <!--<script src="${pageContext.request.contextPath}/js/cform.js"></script>-->
+    <!--<script src="${pageContext.request.contextPath}/js/cform_jpower.js"></script>-->
+    <!--<script src="${pageContext.request.contextPath}/js/plupload.full.min.js"></script>-->
+    <!--<script src="${pageContext.request.contextPath}/js/index.js"></script>-->
+    <!--<link id="bizLink" rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/skin.css">-->
+    <!--<style>-->
+        <!--a{text-decoration:none;}-->
+        <!--.spanbb,.editfile,.linkaBtn{border: none;-->
+            <!--font-size: 14px;-->
+            <!--background: #1ca6e8;-->
+            <!--color: #fff;-->
+            <!--width: 80px;-->
+            <!--height: 40px;-->
+            <!--padding:10px;-->
+            <!--border-radius:10px;-->
+            <!--cursor: pointer;}-->
+        <!--.btn_addPic{-->
+            <!--display: inline-block;-->
+            <!--position: relative;-->
+            <!--height: 39px;-->
+            <!--overflow: hidden;-->
+            <!--padding: 0 30px;-->
+            <!--border: 1px solid #EBEBEB;-->
+            <!--background: #f1fbfe;-->
+            <!--color: #999999;-->
+            <!--width:83%;-->
+            <!--font: 14px/39px 'MicroSoft Yahei','Simhei';-->
+            <!--cursor: pointer;-->
+            <!--text-align: center;-->
+        <!--}-->
+
+        <!--.btn_addPic em {-->
+            <!--background:url(${pageContext.request.contextPath}/images/add.png) 0 0;-->
+            <!--display: inline-block;-->
+            <!--width: 18px;-->
+            <!--height: 18px;-->
+            <!--overflow: hidden;-->
+            <!--margin: 10px 5px 10px 0;-->
+            <!--line-height: 20em;-->
+            <!--vertical-align: middle;-->
+        <!--}-->
+        <!--.btn_addPic:hover em{-->
+            <!--background-position:-19px 0;}-->
+        <!--.filePrew {-->
+            <!--display: block;-->
+            <!--position: absolute;-->
+            <!--top: 0;-->
+            <!--left: 0;-->
+            <!--width: 100%;-->
+            <!--height: 39px;-->
+            <!--cursor: pointer;-->
+            <!--opacity: 0;-->
+            <!--filter:alpha(opacity: 0);-->
+        <!--}-->
+        <!--.file_form{width:327px;}-->
+        <!--.niubi{visibility: hidden;-->
+            <!--top: 100px;-->
+            <!--left: 50%;-->
+            <!--margin-left: -300px;-->
+            <!--width: 520px;-->
+            <!--background: #eee url(${pageContext.request.contextPath}/images/modal-gloss.png) no-repeat -200px -80px;-->
+            <!--position: absolute;-->
+            <!--z-index: 101;-->
+            <!--padding: 30px 40px 34px;-->
+            <!-- -moz-border-radius: 5px;-->
+            <!-- -webkit-border-radius: 5px;-->
+            <!--border-radius: 5px;-->
+            <!-- -moz-box-shadow: 0 0 10px rgba(0,0,0,.4);-->
+            <!-- -webkit-box-shadow: 0 0 10px rgba(0,0,0,.4);-->
+            <!-- -box-shadow: 0 0 10px rgba(0,0,0,.4);}-->
+        <!--.fiem{position: fixed;-->
+            <!--height: 100%;-->
+            <!--width: 100%;-->
+            <!--background: #000;-->
+            <!--background: rgba(0,0,0,.8);-->
+            <!--z-index: 100;-->
+            <!--display: none;-->
+            <!--top: 0;-->
+            <!--left: 0;-->
+        <!--}-->
+        <!--.submitbtn{border: none;-->
+            <!--font-size: 14px;-->
+            <!--background: #1ca6e8;-->
+            <!--color: #fff;-->
+            <!--width: 80px;-->
+            <!--height: 40px;-->
+            <!--cursor: pointer;}-->
+        <!--.close-reveal-modal {-->
+            <!--font-size: 22px;-->
+            <!--line-height: .5;-->
+            <!--position: absolute;-->
+            <!--top: 8px;-->
+            <!--right: 11px;-->
+            <!--color: #aaa;-->
+            <!--text-shadow: 0 -1px 1px rbga(0,0,0,.6);-->
+            <!--font-weight: bold;-->
+            <!--cursor: pointer;-->
+        <!--}-->
+    <!--</style>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<table class="cfTable" style="width:860px">-->
+    <!--<colgroup>-->
+        <!--<col class="cfFieldLabel" style="width: 25%;">-->
+        <!--<col class="cfFieldInput" style="width: 25%;">-->
+        <!--<col class="cfFieldInput" style="width: 25%;">-->
+        <!--<col class="cfFieldInput" style="width: 25%;">-->
+    <!--</colgroup>-->
+    <!--<tbody>-->
+
+    <!--<c:forEach var="item" items="${metail}">-->
+        <!--<tr>-->
+            <!--<td class="cfFieldLabel" rowspan="1" colspan="2" style="text-align: left;">${item.name}&nbsp;</td>-->
+            <!--<td class="cfFieldInput" rowspan="1" colspan="1">-->
+                <!--<span class="spanbb" id="${item.id}">上传</span>-->
+            <!--</td>-->
+            <!--<td class="cfFieldInput" rowspan="1" colspan="1">-->
+                <!--<%&#45;&#45;<c:if test="${path != '' && item.id=='A02103C19218415F9C304F0FC438669A'}">&#45;&#45;%>-->
+                    <!--<%&#45;&#45;<span id="${item.id}-">&#45;&#45;%>-->
+                        <!--<%&#45;&#45;<a href="${path}" target='_blank' class='linkaBtn' >查看</a>&#45;&#45;%>-->
+                    <!--<%&#45;&#45;</span>&#45;&#45;%>-->
+                <!--<%&#45;&#45;</c:if>&#45;&#45;%>-->
+                <!--<span id="${item.id}+">-->
+                <!--</span>-->
+            <!--</td>-->
+        <!--</tr>-->
+    <!--</c:forEach>-->
+    <!--</tbody>-->
+<!--</table>-->
+<!--<%&#45;&#45;<a class="linkaBtn" href="${pageContext.request.contextPath}/item/displayitem.html?dataId=${dataId}&code=${code}">确定</a>&#45;&#45;%>-->
+<!--<a class="linkaBtn" href="${pageContext.request.contextPath}/user/memberInfo.html?jsp=4">确定</a>-->
+<!--<div class="niubi" style="opacity: 1;top: 100px;visibility: hidden;">-->
+    <!--<form id="f" action="" method="post" enctype="multipart/form-data" class="file_form">-->
+        <!--<a href="javascript:void(0);" class="btn_addPic"><span><em>+</em>添加图片</span>-->
+            <!--<%&#45;&#45;<input id="UploadFile" type="file" name="metail" class="filePrew cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="UploadFile" cf_modelitemname="文件上传"></a>&#45;&#45;%>-->
+        <!--<input type="file" name="metail" multiple="multiple" class="filePrew cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text"  cf_modelitemname="文件上传"></a>-->
+        <!--<input id="UploadFile" type="hidden" name="metailId" value="UploadFile" class="filePrew cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="UploadFile"></a>-->
+        <!--<input type="hidden" name="dataId" value="${dataId}">-->
+        <!--<%&#45;&#45;<input type="submit" value="提交" class="submitbtn">&#45;&#45;%>-->
+        <!--<input type="button" onclick="upMetail()" value="提交" class="submitbtn" >-->
+        <!--<input type="reset" value="重置" id="reset" class="submitbtn">-->
+    <!--</form>-->
+    <!--<a class="close-reveal-modal">×</a>-->
+<!--</div>-->
+<!--<style>-->
+
+<!--</style>-->
+<!--<div class="fiem" style="display: none; cursor: pointer;">-->
+
+<!--</div>-->
+
+
+<!--<script type="text/javascript">-->
+
+    <!--$(function(){-->
+        <!--var screenWidth = $(window).width();-->
+        <!--screenHeight = $(window).height(); //当前浏览器窗口的 宽高-->
+        <!--var scrolltop = $(document).scrollTop();//获取当前窗口距离页面顶部高度-->
+        <!--$(".spanbb").click(function(){-->
+            <!--var sss = $(this).attr('id');-->
+            <!--var niubiClass=$(".niubi");-->
+
+            <!--var objLeft = (screenWidth - niubiClass.width())/4 ;-->
+            <!--var objTop = (screenHeight - niubiClass.height())/2 + scrolltop;-->
+            <!--var nameId = $('.filePrew').attr('value',sss)-->
+            <!--$(".niubi").css({"visibility":"visible","top":objLeft + 'px',"overflow": "hidden"});-->
+            <!--$("body").height(screenHeight).css({"overflow": "hidden"});-->
+            <!--$(".fiem").height(screenHeight).css({"overflow": "hidden"}).fadeIn(300);-->
+
+        <!--})-->
+        <!--$("#reset").click(function(){-->
+            <!--$(this).parents('.niubi').find('.btn_addPic span').html("<em>+</em>添加图片");-->
+        <!--})-->
+        <!--$(".fiem").click(function(){-->
+            <!--var reg = /[^\\\/]*[\\\/]+/g;-->
+            <!--var name = $(this).siblings(".niubi").find('.file_form .btn_addPic .filePrew').val().replace(reg, '');-->
+            <!--if(name != ''){-->
+                <!--var text =name.substr();//获取没有后缀的名称-->
+                <!--var mbmb = $(this).siblings(".niubi").find('.file_form .btn_addPic .filePrew').val('');-->
+                <!--$(this).siblings('.niubi').find('.btn_addPic span').html("<em>+</em>添加图片");-->
+<!--//-->
+
+            <!--}-->
+
+            <!--$(".niubi").css("visibility","hidden");-->
+
+            <!--$("body").css({"overflow": "hidden","height":"auto"});-->
+            <!--$(this).fadeOut(300);-->
+        <!--})-->
+        <!--$(".close-reveal-modal").click(function(){-->
+            <!--var reg = /[^\\\/]*[\\\/]+/g;-->
+            <!--var name = $(this).parents(".niubi").find('.file_form .btn_addPic .filePrew').val().replace(reg, '');-->
+            <!--if(name != ''){-->
+                <!--var text =name.substr();//获取没有后缀的名称-->
+                <!--var mbmb = $(this).parents(".niubi").find('.file_form .btn_addPic .filePrew').val('');-->
+                <!--$(this).parents('.niubi').find('.btn_addPic span').html("<em>+</em>添加图片");-->
+<!--//-->
+
+            <!--}-->
+            <!--$(".niubi").css("visibility","hidden");-->
+            <!--$("body").css({"overflow": "hidden","height":"auto"});-->
+            <!--$('.fiem').fadeOut(300);-->
+        <!--})-->
+
+    <!--})-->
+
+<!--</script>-->
+<!--<script>-->
+    <!--$('.filePrew').on('change', function() {-->
+        <!--var reg = /[^\\\/]*[\\\/]+/g; //匹配文件的名称和后缀的正则表达式-->
+        <!--var name = $(this).val().replace(reg, '');-->
+        <!--var text =name.substr();//获取没有后缀的名称-->
+<!--//		alert(text);-->
+        <!--$(this).parents('.btn_addPic ').find('span').html(text);-->
+    <!--});-->
+
+    <!--function upMetail() {-->
+        <!--var ssa = new FormData(document.getElementById("f"));-->
+        <!--$.ajax({-->
+            <!--url : "${pageContext.request.contextPath}/item/upanddisplay.html",-->
+            <!--type : "POST",-->
+            <!--data:ssa,-->
+            <!--cache: false,-->
+            <!--processData:false,-->
+            <!--contentType:false,-->
+            <!--success : function(data) {-->
+                <!--if (data) {-->
+                    <!--alert("上传成功");-->
+                    <!--var json = eval("("+data+")");-->
+                    <!--var metailId = json.metailId;-->
+                    <!--var dataId = json.dataId;-->
+                    <!--var num = parseInt(json.num);-->
+<!--//                    var spann = document.getElementById(metailId+"-");-->
+<!--//                    spann.style.display="none";-->
+                    <!--var span = document.getElementById(metailId+"+");-->
+                    <!--span.innerHTML = "";-->
+                    <!--for (var i=0;i<num;i++) {-->
+                        <!--var param = "${pageContext.request.contextPath}/item/metailimage.html?metailId="+metailId+"&dataId="+dataId+"&index="+i;-->
+                        <!--var p = "<a href= \'"+param+"\' target='_blank' class='linkaBtn' >查看</a>";-->
+                        <!--var element = document.createElement("span");-->
+                        <!--element.innerHTML = p;-->
+                        <!--span.appendChild(element);-->
+                    <!--}-->
+                <!--}-->
+            <!--},-->
+            <!--error : function(data) {-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
+
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

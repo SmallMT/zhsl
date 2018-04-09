@@ -63,6 +63,8 @@
                         <!--<input id="FormId" name="FormId" value="${formId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
                     <!--</tr>-->
                 <!--</c:if>-->
+                <input id="companyCode" name="companyCode" th:value="*{creditCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <input id="code" name="itemCode" th:value="${itemCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
                 <tr>
                     <td class="cfFieldLabel">事项名称：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">

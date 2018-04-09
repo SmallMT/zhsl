@@ -66,6 +66,8 @@ mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">烟�
                     <!--<input id="DataId" name="DataId" value="${dataId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
                     <!--<input id="FormId" name="FormId" value="${formId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
                 <!--</tr>-->
+                <input id="companyCode" name="companyCode" th:value="*{creditCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <input id="code" name="itemCode" th:value="${itemCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
                 <tr>
                     <td class="cfFieldLabel">审批事项&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3"><input id="ShenPiShiXiang" name="ShenPiShiXiang" type="text" th:value="${name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShenPiShiXiang" cf_modelitemname="审批事项" disabled="disabled">

@@ -8,21 +8,22 @@ import com.bov.mt.entity.vm.BindingCompanyInfoVM;
 import com.bov.mt.entity.vm.UserCertificationInfoVM;
 import com.bov.mt.service.mongodb.MongoService;
 import com.bov.mt.utils.ItemUtil;
+import com.bov.mt.utils.LangChaoService;
 import com.bov.mt.utils.page.Page;
 import com.bov.mt.utils.page.PageFactory;
 import com.bov.mt.utils.uaa.UaaUtil;
+import net.sf.json.JSONObject;
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -37,6 +38,8 @@ public class ItemController {
     private UaaUtil uaaUtil;
     @Autowired
     private ItemUtil itemUtil;
+    @Autowired
+    private LangChaoService lc;
 
     @GetMapping("zhslindex")
     public String zhslIndex(HttpServletRequest request, Model model){
@@ -159,6 +162,46 @@ public class ItemController {
         model.addAttribute("companyInfo",vm);
         model.addAttribute("name",itemName);
         model.addAttribute("userCertificationInfo",userCertificationInfoVM);
+        model.addAttribute("itemCode",code);
         return "item/forms/"+code;
+    }
+
+
+    //保存数据到本地数据库，以及保存(没有申报)数据到浪潮
+    @PostMapping("insertitem")
+    @ResponseBody
+    public String insertItem(@RequestBody String data,HttpServletRequest request){
+        String username = (String) request.getSession().getAttribute("username");
+        JSONObject dataJSON = JSONObject.fromObject(data);
+        String companyCode = dataJSON.getString("companyCode");
+        String itemCode = dataJSON.getString("itemCode");
+        //保存数据到模拟浪潮系统
+        //1.获取formId
+        ItemInfo itemInfo = template.findOne(new Query().addCriteria(Criteria.where("code").is(itemCode)),ItemInfo.class,MongoTable.ITEMINFO);
+        String formId = itemInfo.getFormId();
+        //2.处理data
+        dataJSON.remove("companyCode");
+        dataJSON.remove("itemCode");
+        String dataId = lc.saveData(formId,dataJSON);
+        Document banJian = new Document();
+        banJian.put("username",username);
+        banJian.put("companyCode",companyCode);
+        banJian.put("code",itemCode);
+        //获取办件名称
+        String itemName = itemInfo.getName();
+        String gsj = itemInfo.getGsj();
+        banJian.put("name",itemName);
+        banJian.put("gsj",gsj);
+        banJian.put("data",dataJSON);
+        banJian.put("saveTime",new Date());
+        banJian.put("dataId",dataId);
+        template.insert(banJian,MongoTable.BANJIAN);
+        return "yes";
+    }
+
+    @GetMapping("metails")
+    public String metails(HttpServletRequest request){
+
+        return "";
     }
 }

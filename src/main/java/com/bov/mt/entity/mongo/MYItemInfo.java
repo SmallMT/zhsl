@@ -1,5 +1,6 @@
 package com.bov.mt.entity.mongo;
 
+import net.sf.json.JSONObject;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -15,6 +16,17 @@ public class MYItemInfo {
     private String gsj;
     private Date saveTime;
     private String time;
+    private JSONObject data;
+    private String dataId;
+    private String receiveNum;
+
+    public String getReceiveNum() {
+        return receiveNum;
+    }
+
+    public void setReceiveNum(String receiveNum) {
+        this.receiveNum = receiveNum;
+    }
 
     public String getTime() {
         return time;
@@ -23,9 +35,6 @@ public class MYItemInfo {
     public void setTime(String time) {
         this.time = time;
     }
-
-    private Map<String,String> data;
-    private String dataId;
 
     public ObjectId get_id() {
         return _id;
@@ -91,11 +100,11 @@ public class MYItemInfo {
         this.saveTime = saveTime;
     }
 
-    public Map<String, String> getData() {
+    public JSONObject getData() {
         return data;
     }
 
-    public void setData(Map<String, String> data) {
+    public void setData(JSONObject data) {
         this.data = data;
     }
 
