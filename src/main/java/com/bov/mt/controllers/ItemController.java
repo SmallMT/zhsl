@@ -296,8 +296,46 @@ public class ItemController {
     }
 
     @GetMapping("updatemybanjian")
-    public void updateMyBanJian(@RequestParam("dataId") String dataId){
+    public String updateMyBanJian(@RequestParam("dataId") String dataId,Model model){
 
+        //获取办件表单信息
+        Query query = new Query();
+        query.addCriteria(Criteria.where("dataId").is(dataId));
+        MYItemInfo myItemInfo = template.findOne(query,MYItemInfo.class,MongoTable.BANJIAN);
+        String itemCode = myItemInfo.getCode();
+        JSONObject data = myItemInfo.getData();
+        //获取办件材料信息
+        List<MetailInfo> metailInfos = template.find(query,MetailInfo.class,MongoTable.ITEMMETAIL);
+        //获取该办件所有需要提交的材料信息
+        String metails = lc.getMetails(itemCode);
+        JSONArray array = JSONArray.fromObject(JSONObject.fromObject(metails).getString("ItemInfo"));
+        JSONArray metailArr = new JSONArray();
+        for (int i=0;i<array.size();i++) {
+            JSONObject metailUnit = new JSONObject();
+            JSONObject unit = array.getJSONObject(i);
+            String metailId = unit.getString("CODE");
+            metailUnit.put("id",metailId);
+            metailUnit.put("name",unit.getString("NAME"));
+            metailUnit.put("docid","");
+            //此事项是否提交了材料
+            for (MetailInfo metailInfo : metailInfos) {
+                if (metailId.equalsIgnoreCase(metailInfo.getMetailId())) {
+                    metailUnit.put("docid",metailInfo.getDocid());
+                    break;
+                }
+            }
+            metailArr.add(metailUnit);
+        }
+        model.addAttribute("myItemInfo",myItemInfo);
+        model.addAttribute("metails",metailInfos);
+        model.addAttribute("metailArr",metailArr);
+        return "item/forms/update/"+itemCode;
+    }
 
+    @PostMapping("doupdateitem")
+    @ResponseBody
+    public String doUpdateMyBanJian(@RequestBody String data){
+
+        return null;
     }
 }

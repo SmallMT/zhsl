@@ -47,7 +47,7 @@
     </script>
     <p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><b><span style="font-size:15.0pt;line-height:
 150%;font-family:宋体;mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast">《食品经营许可证》首次发放<span lang="EN-US"></span></span></b></p>
-    <form name="市受理表单" th:object="${companyInfo}" method="post" onsubmit="return false" action="http://199.224.253.9:8081/cform/view?formId=ShiShouLiBiaoDan" cf_elementtype="form" cf_themeid="cool" cf_iscreatetable="1" id="ShiShouLiBiaoDan" cf_appcode="INSPUR-DZZW-YSL" cf_iscreateid="1" cf_modelid="ShiShouLiBiaoDan" cf_modelname="市受理表单" cf_fieldcounter="13">
+    <form name="市受理表单" th:object="${myItemInfo}" method="post" onsubmit="return false" action="http://199.224.253.9:8081/cform/view?formId=ShiShouLiBiaoDan" cf_elementtype="form" cf_themeid="cool" cf_iscreatetable="1" id="ShiShouLiBiaoDan" cf_appcode="INSPUR-DZZW-YSL" cf_iscreateid="1" cf_modelid="ShiShouLiBiaoDan" cf_modelname="市受理表单" cf_fieldcounter="13">
         <br>
         <table class="cfTable">
             <colgroup>
@@ -57,73 +57,68 @@
                             <col class="cfFieldInput" style="width:30%">
             </colgroup>
             <tbody>
-                <!--<c:if test="${dataId != null}">-->
-                    <!--<tr>-->
-                        <!--<input id="DataId" name="DataId" value="${dataId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
-                        <!--<input id="FormId" name="FormId" value="${formId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
-                    <!--</tr>-->
-                <!--</c:if>-->
-                <input id="companyCode" name="companyCode" th:value="*{creditCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
-                <input id="code" name="itemCode" th:value="${itemCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <input id="companyCode" name="companyCode" th:value="*{myItemInfo.companyCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <input id="code" name="itemCode" th:value="${myItemInfo.code}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <input id="dataId" name="dataId" th:value="${myItemInfo.dataId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
                 <tr>
                     <td class="cfFieldLabel">事项名称：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                    <input id="ShiXiangMingChen" name="ShiXiangMingChen" th:value="${name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="事项名称" type="text" disabled="disabled">
+                    <input id="ShiXiangMingChen" name="ShiXiangMingChen" th:value="${myItemInfo.name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="事项名称" type="text" disabled="disabled">
                     </td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">申请事项内容：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <input id="ShenQingShiXiangNaRong" name="ShenQingShiXiangNaRong" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShenQingShiXiangNaRong" cf_modelitemname="申请事项内容" type="text">
+                        <input id="ShenQingShiXiangNaRong" name="ShenQingShiXiangNaRong" th:value="${myItemInfo.data.ShenQingShiXiangNaRong}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShenQingShiXiangNaRong" cf_modelitemname="申请事项内容" type="text">
                     </td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">个人/单位名称：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <input id="GeRenDanWeiMingChen" name="GeRenDanWeiMingChen" th:value="*{enterpriseName}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="GeRenDanWeiMingChen" cf_modelitemname="个人/单位名称" type="text">
+                        <input id="GeRenDanWeiMingChen" name="GeRenDanWeiMingChen" th:value="${myItemInfo.data.GeRenDanWeiMingChen}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="GeRenDanWeiMingChen" cf_modelitemname="个人/单位名称" type="text">
                     </td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">经办人：&nbsp;</td>
                     <td class="cfFieldInput">
-                        <input id="JingBanRen" name="JingBanRen" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="JingBanRen" cf_modelitemname="经办人" type="text">
+                        <input id="JingBanRen" name="JingBanRen" th:value="${myItemInfo.data.JingBanRen}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="JingBanRen" cf_modelitemname="经办人" type="text">
                     </td>
                     <td class="cfFieldLabel">经办人联系电话 ：&nbsp;</td>
                     <td class="cfFieldInput">
-                        <input id="JingBanRenLianXiDianHua" name="JingBanRenLianXiDianHua" value="" class="cfText jingbanren" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="JingBanRenLianXiDianHua" cf_modelitemname="经办人联系电话 " type="text">
+                        <input id="JingBanRenLianXiDianHua" name="JingBanRenLianXiDianHua" th:value="${myItemInfo.data.JingBanRenLianXiDianHua}" class="cfText jingbanren" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="JingBanRenLianXiDianHua" cf_modelitemname="经办人联系电话 " type="text">
 						<span class="mobile_hint"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">法定代表人：&nbsp;</td>
                     <td class="cfFieldInput">
-                        <input id="FaDingDaiBiaoRen" name="FaDingDaiBiaoRen" th:value="*{legalPersonName}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="FaDingDaiBiaoRen" cf_modelitemname="法定代表人" type="text">
+                        <input id="FaDingDaiBiaoRen" name="FaDingDaiBiaoRen" th:value="${myItemInfo.data.FaDingDaiBiaoRen}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="FaDingDaiBiaoRen" cf_modelitemname="法定代表人" type="text">
                     </td>
                     <td class="cfFieldLabel">法人联系电话：&nbsp;</td>
                     <td class="cfFieldInput">
-                        <input id="FaRenLianXiDianHua" name="FaRenLianXiDianHua" th:value="*{legalPersonPhone}" class="cfText FaRenLianXiDianHua" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="FaRenLianXiDianHua" cf_modelitemname="法人联系电话" type="text">
+                        <input id="FaRenLianXiDianHua" name="FaRenLianXiDianHua" th:value="${myItemInfo.data.FaRenLianXiDianHua}" class="cfText FaRenLianXiDianHua" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="FaRenLianXiDianHua" cf_modelitemname="法人联系电话" type="text">
 						<span class="mobile_faren"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">联系地址：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <input id="LianXiDiZhi" name="LianXiDiZhi" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="LianXiDiZhi" cf_modelitemname="联系地址" type="text">&nbsp;&nbsp;</td>
+                        <input id="LianXiDiZhi" name="LianXiDiZhi" th:value="${myItemInfo.data.LianXiDiZhi}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="LianXiDiZhi" cf_modelitemname="联系地址" type="text">&nbsp;&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">注册地址：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <input id="ZhuCeDiZhi" name="ZhuCeDiZhi" th:value="*{enterpriserAddress}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ZhuCeDiZhi" cf_modelitemname="注册地址" type="text">&nbsp;&nbsp;</td>
+                        <input id="ZhuCeDiZhi" name="ZhuCeDiZhi" th:value="${myItemInfo.data.ZhuCeDiZhi}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ZhuCeDiZhi" cf_modelitemname="注册地址" type="text">&nbsp;&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">仓库地址：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <input id="CangKuDiZhi" name="CangKuDiZhi" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="CangKuDiZhi" cf_modelitemname="仓库地址" type="text">&nbsp;&nbsp;</td>
+                        <input id="CangKuDiZhi" name="CangKuDiZhi" th:value="${myItemInfo.data.CangKuDiZhi}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="CangKuDiZhi" cf_modelitemname="仓库地址" type="text">&nbsp;&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="cfFieldLabel">许可内容：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <textarea id="XuKeNaRong" name="XuKeNaRong" value="" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="XuKeNaRong" cf_modelitemname="许可内容" minheight="80" maxheight="200">
+                        <textarea id="XuKeNaRong" name="XuKeNaRong" th:value="${myItemInfo.data.XuKeNaRong}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="XuKeNaRong" cf_modelitemname="许可内容" minheight="80" maxheight="200">
                         </textarea>&nbsp;&nbsp;</td>
                 </tr>
                 <tr>
@@ -135,16 +130,16 @@
                         </div>
                         <div class="morem_box" style="display: none;">
                             <label for="ApplicantName">申请人名称
-                                <input id="ApplicantName" name="ApplicantName" th:value="${userCertificationInfo.name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantName" cf_modelitemname="申请人名称" type="text">
+                                <input id="ApplicantName" name="ApplicantName" th:value="${myItemInfo.data.ApplicantName}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantName" cf_modelitemname="申请人名称" type="text">
                             </label>
                             <label for="ApplicantID">申请人身份证号
-                                <input id="ApplicantID" name="ApplicantID" th:value="${userCertificationInfo.identity}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantID" cf_modelitemname="申请人身份证号" type="text">
+                                <input id="ApplicantID" name="ApplicantID" th:value="${myItemInfo.data.ApplicantID}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantID" cf_modelitemname="申请人身份证号" type="text">
                             </label>
                             <label for="ApplicantMobile">申请人手机号
-                                <input id="ApplicantMobile" name="ApplicantMobile" th:value="${session.user.tel}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantMobile" cf_modelitemname="申请人手机号" type="text">
+                                <input id="ApplicantMobile" name="ApplicantMobile" th:value="${myItemInfo.data.ApplicantMobile}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantMobile" cf_modelitemname="申请人手机号" type="text">
                             </label>
                             <label for="ApplicantAddress">申请人地址
-                                <input id="ApplicantAddress" name="ApplicantAddress" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantAddress" cf_modelitemname="申请人地址" type="text">
+                                <input id="ApplicantAddress" name="ApplicantAddress" th:value="${myItemInfo.data.ApplicantAddress}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantAddress" cf_modelitemname="申请人地址" type="text">
                             </label>
                         </div>
                         <div class="SendType">
@@ -153,16 +148,16 @@
                         </div>
                         <div class="toidifangshi" style="display: none;">
                             <label for="HallCode">邮寄编码
-                                <input id="HallCode" name="HallCode" value="572000" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="HallCode" cf_modelitemname="申请人地址" type="text">
+                                <input id="HallCode" name="HallCode" th:value="${myItemInfo.data.HallCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="HallCode" cf_modelitemname="申请人地址" type="text">
                             </label>
                             <label for="HallName">邮寄人姓名
-                                <input id="HallName" name="HallName" th:value="${userCertificationInfo.name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="HallName" cf_modelitemname="申请人地址" type="text">
+                                <input id="HallName" name="HallName" th:value="${myItemInfo.data.HallName}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="HallName" cf_modelitemname="申请人地址" type="text">
                             </label>
                             <label for="MailAddress">邮寄人地址
-                                <input id="MailAddress" name="MailAddress" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="MailAddress" cf_modelitemname="申请人地址" type="text">
+                                <input id="MailAddress" name="MailAddress" th:value="${myItemInfo.data.MailAddress}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="MailAddress" cf_modelitemname="申请人地址" type="text">
                             </label>
                             <label for="SendMobile">邮寄人电话
-                                <input id="SendMobile" name="SendMobile" th:value="${session.user.tel}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="MailAddress" cf_modelitemname="申请人地址" type="text">
+                                <input id="SendMobile" name="SendMobile" th:value="${myItemInfo.data.SendMobile}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="MailAddress" cf_modelitemname="申请人地址" type="text">
                             </label>
                         </div>
                     </td>
@@ -170,7 +165,7 @@
                 <tr>
                     <td class="cfFieldLabel">备注：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
-                        <textarea id="BeiZhu" name="BeiZhu" value="" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="BeiZhu" cf_modelitemname="备注" minheight="80" maxheight="200">
+                        <textarea id="BeiZhu" name="BeiZhu" value="" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="BeiZhu" cf_modelitemname="备注" minheight="80" maxheight="200" th:value="${myItemInfo.data.BeiZhu}">
                         </textarea>&nbsp;&nbsp;</td>
 
                 </tr>
@@ -182,12 +177,10 @@
             </tbody>
         </table>
     </form>
-    <!--<c:if test="${data != null}">-->
-        <!--<%@include file="/WEB-INF/jsp/item/updatemetail.jsp"%>-->
-    <!--</c:if>-->
+    <div th:replace="item/updatemetail :: html"></div>
 
 </div>
-<button id="btnSave" type="button" onclick="submitSave(0)"  class="btn btn-sm btn-default">保存</button>
+<button id="btnSave" type="button" onclick="submitUpdate()"  class="btn btn-sm btn-default">修改</button>
 <!--<c:if test="${data != null && isSave == false}">-->
     <!--<button id="btnSave" type="button" onclick="submitSave(1)"  class="btn btn-sm btn-default">修改</button>-->
 <!--</c:if>-->
