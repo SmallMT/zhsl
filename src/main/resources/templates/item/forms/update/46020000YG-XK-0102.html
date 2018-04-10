@@ -1,0 +1,167 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>烟草专卖零售许可证-延续</title>
+    <link th:href="@{~/css/cform.css}" rel="stylesheet">
+    <script th:src="@{~/js/jquery-1.11.1.js}"></script>
+    <script th:src="@{~/js/WdatePicker.js}"></script>
+    <!--序列化表单转JSON格式-->
+    <script th:src="@{~/js/jquery.serializejson.js}"></script>
+    <script th:src="@{~/js/cform.js}"></script>
+    <script th:src="@{~/js/cform_jpower.js}"></script>
+    <script th:src="@{~/js/plupload.full.min.js}"></script>
+    <script th:src="@{~/js/index.js}"></script>
+    <link id="bizLink" rel="stylesheet" type="text/css" th:href="@{~/css/skin.css}">
+</head>
+
+<body>
+<div class="wrap4">
+		<div class="head_main">
+			<div class="logo"><a href="http://zwzx.sanya.gov.cn/"><img th:src="@{~/images/logo.png}"></a></div>
+			<div class="search"></div>
+		</div>
+	</div>
+<div class="w wrap9">
+		<div class="dw">
+			<div class="local">
+				<span class="local_tag">当前位置：</span>
+	    		<a href="#" class="local_list">新增办件</a>
+	    		<span style=" font-size:14px; line-height:24px; color:#fff;">&gt;</span>
+	    		<span class="local_list">烟草专卖零售许可证-延续</span>
+			</div>
+	</div>	
+	</div>
+<div class="cfBody" id="cfBody" style="">
+    <script th:inline="javascript" id="cfCustomedJs">
+        CForm.on("afterLoadFormUI", function()
+        {
+            var bindControl = document.getElementById("ShenPiShiXiang");
+            var bindValue = CForm.getUrlParam("itemName");
+            if (bindValue)
+            {
+                bindValue = decodeURIComponent(decodeURIComponent(
+                    bindValue));
+                CForm.setFieldValue(bindControl, bindValue);
+            }
+        })
+    </script>
+
+    <p class="MsoNormal" align="center" style="text-align:center"><b><span style="font-size:15.0pt;font-family:宋体;mso-ascii-font-family:
+Calibri;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:宋体;mso-fareast-theme-font:
+minor-fareast;mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin"><br></span></b></p>
+    <p class="MsoNormal" align="center" style="text-align:center"><b><span style="font-size:15.0pt;font-family:宋体;mso-ascii-font-family:
+Calibri;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:宋体;mso-fareast-theme-font:
+minor-fareast;mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin">烟草专卖零售许可证-延续</span></b><b><span lang="EN-US" style="font-size:15.0pt"></span></b></p>
+    <p class="MsoNormal" align="center" style="text-align:center"><b><span style="font-size:15.0pt;font-family:宋体;mso-ascii-font-family:
+Calibri;mso-ascii-theme-font:minor-latin;mso-fareast-font-family:宋体;mso-fareast-theme-font:
+minor-fareast;mso-hansi-font-family:Calibri;mso-hansi-theme-font:minor-latin"><br></span></b></p>
+    <form name="市烟草局_烟草专卖零售许可证延续(综合)" method="post" th:object="${companyInfo}" onsubmit="return false" action="http://199.224.253.9:8081/cform/view?formId=ShiYanCaoJu_YCZMLSXKZYXZH" cf_elementtype="form" cf_themeid="default" cf_iscreatetable="1" id="ShiYanCaoJu_YCZMLSXKZYXZH" cf_appcode="INSPUR-DZZW-YSL" cf_iscreateid="1" cf_modelid="ShiYanCaoJu_YCZMLSXKZYXZH" cf_modelname="市烟草局_烟草专卖零售许可证延续（综合）" cf_fieldcounter="7">
+        <table class="cfTable">
+            <colgroup>
+                <col class="cfFieldLabel" style="width:20%">
+                    <col class="cfFieldInput" style="width:30%">
+                        <col class="cfFieldLabel" style="width:20%">
+                            <col class="cfFieldInput" style="width:30%">
+            </colgroup>
+            <tbody>
+                <!--<tr>-->
+                    <!--<input id="DataId" name="DataId" value="${dataId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
+                    <!--<input id="FormId" name="FormId" value="${formId}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">-->
+                <!--</tr>-->
+                <input id="companyCode" name="companyCode" th:value="*{creditCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <input id="code" name="itemCode" th:value="${itemCode}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShiXiangMingChen" cf_modelitemname="" type="hidden">
+                <tr>
+                    <td class="cfFieldLabel">审批事项&nbsp;</td>
+                    <td class="cfFieldInput" rowspan="1" colspan="3">
+                        <input id="ShenPiShiXiang" name="ShenPiShiXiang" type="text" th:value="${name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShenPiShiXiang" cf_modelitemname="审批事项" disabled="disabled">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cfFieldLabel">许可证号码&nbsp;</td>
+                    <td class="cfFieldInput" rowspan="1" colspan="3">
+                        <input id="XuKeZhengHaoMa" name="XuKeZhengHaoMa" type="text" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="XuKeZhengHaoMa" cf_modelitemname="许可证号码">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cfFieldLabel">负责人（经营者）</td>
+                    <td class="cfFieldInput">
+                        <input id="FuZeRenJingYingZhe" name="FuZeRenJingYingZhe" type="text" th:value="*{legalPersonName}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="FuZeRenJingYingZhe" cf_modelitemname="负责人（经营者）">
+                    </td>
+                    <td class="cfFieldLabel">联系电话&nbsp;</td>
+                    <td class="cfFieldInput">
+                        <input id="LianXiDianHua" name="LianXiDianHua" type="text" th:value="*{legalPersonPhone}" class="cfText jingbanren" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="LianXiDianHua" cf_modelitemname="联系电话">
+						<span class="mobile_hint"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cfFieldLabel">委托代理人&nbsp;</td>
+                    <td class="cfFieldInput">
+                        <input id="WeiTuoDaiLiRen" name="WeiTuoDaiLiRen" type="text" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="WeiTuoDaiLiRen" cf_modelitemname="委托代理人">
+                    </td>
+                    <td class="cfFieldLabel">身份证号码&nbsp;</td>
+                    <td class="cfFieldInput">
+                        <input id="ShenFenZhengHaoMa" name="ShenFenZhengHaoMa" type="text" value="" class="cfText ShenFenZhengHaoMa" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ShenFenZhengHaoMa" cf_modelitemname="身份证号码">
+						<span class="mobile_sfzhm"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="cfFieldLabel">服务清单：</td>
+                    <td class="cfFieldInput" rowspan="1" colspan="3">
+                        <div class="PersonInfo">申请人信息：
+                            <input type="radio" class="moren" name="PersonInfo" value="0" checked="checked">默认
+                            <input type="radio" class="zidingyi" name="PersonInfo" value="1">自定义
+                        </div>
+                        <div class="morem_box" style="display: none;">
+                            <label for="ApplicantName">申请人名称
+                                <input id="ApplicantName" name="ApplicantName" th:value="${userCertificationInfo.name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantName" cf_modelitemname="申请人名称" type="text">
+                            </label>
+                            <label for="ApplicantID">申请人身份证号
+                                <input id="ApplicantID" name="ApplicantID" th:value="${userCertificationInfo.identity}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantID" cf_modelitemname="申请人身份证号" type="text">
+                            </label>
+                            <label for="ApplicantMobile">申请人手机号
+                                <input id="ApplicantMobile" name="ApplicantMobile" th:value="${session.user.tel}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantMobile" cf_modelitemname="申请人手机号" type="text">
+                            </label>
+                            <label for="ApplicantAddress">申请人地址
+                                <input id="ApplicantAddress" name="ApplicantAddress" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="ApplicantAddress" cf_modelitemname="申请人地址" type="text">
+                            </label>
+                        </div>
+                        <div class="SendType">
+                            邮寄方式：<input type="radio" class="ziqu" name="SendType" value="0" checked="checked">自取
+                            <input type="radio" class="toudi" name="SendType" value="1">投递
+                        </div>
+                        <div class="toidifangshi" style="display: none;">
+                            <label for="HallCode">邮寄编码
+                                <input id="HallCode" name="HallCode" value="572000" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="HallCode" cf_modelitemname="申请人地址" type="text">
+                            </label>
+                            <label for="HallName">邮寄人姓名
+                                <input id="HallName" name="HallName" th:value="${userCertificationInfo.name}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="HallName" cf_modelitemname="申请人地址" type="text">
+                            </label>
+                            <label for="MailAddress">邮寄人地址
+                                <input id="MailAddress" name="MailAddress" value="" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="MailAddress" cf_modelitemname="申请人地址" type="text">
+                            </label>
+                            <label for="SendMobile">邮寄人电话
+                                <input id="SendMobile" name="SendMobile" th:value="${session.user.tel}" class="cfText" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_text" cf_modelitemid="MailAddress" cf_modelitemname="申请人地址" type="text">
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            <tr>
+                <td class="cfFieldLabel">备注：&nbsp;</td>
+                <td class="cfFieldInput" rowspan="1" colspan="3">
+                    <textarea id="BeiZhu" name="BeiZhu" value="" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="BeiZhu" cf_modelitemname="备注" minheight="80" maxheight="200">
+
+                    </textarea>&nbsp;&nbsp;</td>
+            </tr>
+                <tr>
+                    <td class="cfFieldInput" rowspan="1" colspan="4" style="text-align:center;">
+                        <input type="checkbox" disabled checked class="cfFbtn" name="cfFbtn" value="0">本人承诺提供的信息、材料均合法、真实、有效。
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+        <!--<%@include file="/WEB-INF/jsp/item/updatemetail.jsp"%>-->
+</div>
+<button id="btnSave" type="button" onclick="submitSave(0)"  class="btn btn-sm btn-default">保存</button>
+</body>
+</html>

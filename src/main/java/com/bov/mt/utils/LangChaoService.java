@@ -25,6 +25,7 @@ public class LangChaoService {
     private static String LC_METAIL = "http://localhost:9090/getItemInfo?itemCode=";
     private static String LC_UPFILE = "http://localhost:9090/upfile";
     private static String LC_LOADFILE = "http://localhost:9090/load?docid=";
+    private static String LC_DELETEITEM = "http://localhost:9090/deleteitem?dataId=";
     @Value("${realName.filePath}")
     private String dirPath;
     private Logger logger = LoggerFactory.getLogger(LangChaoService.class);
@@ -34,6 +35,11 @@ public class LangChaoService {
         params.put("formId",formId);
         params.put("formData",data.toString());
         return JSONObject.fromObject(post(LC_SAVEDATA,params)).getString("dataId");
+    }
+
+    public String deleteData(String dataId){
+        String url = LC_DELETEITEM + dataId;
+        return get(url);
     }
 
     //获取事项材料信息

@@ -19,6 +19,15 @@ public class MYItemInfo {
     private JSONObject data;
     private String dataId;
     private String receiveNum;
+    private boolean hasApply;
+
+    public boolean isHasApply() {
+        return hasApply;
+    }
+
+    public void setHasApply(boolean hasApply) {
+        this.hasApply = hasApply;
+    }
 
     public String getReceiveNum() {
         return receiveNum;

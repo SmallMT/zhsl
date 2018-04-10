@@ -107,10 +107,10 @@
  <div class="wdsc_tit_main"></div>
     <div id="div1" class="bjjl_list_sub">
         <div class="bjjl_wdbj_tongji">
-            <span style="padding-left: 14px; padding-right: 20px; font-size: 16px; line-height: 50px;">办理中</span>
-            <span style="font-size: 16px; line-height: 50px;">10</span>
-            <span style="padding-left: 45px; padding-right: 20px; font-size: 16px; line-height: 50px;">已办结</span>
-            <span style="font-size: 16px; line-height: 50px;">10</span>
+            <span style="padding-left: 14px; padding-right: 20px; font-size: 16px; line-height: 50px;">我的办件数</span>
+            <span style="font-size: 16px; line-height: 50px;" th:text="${page.totalCount}"></span>
+            <!--<span style="padding-left: 45px; padding-right: 20px; font-size: 16px; line-height: 50px;">已办结</span>-->
+            <!--<span style="font-size: 16px; line-height: 50px;">10</span>-->
         </div>
         <div class="bjjl_wdbj_tit1">序号</div>
         <div class="bjjl_wdbj_tit2">办件名称</div>
@@ -129,9 +129,10 @@
                     <a href="" target="_blank">查看详情</a>
                 </div>
                 <div class="grzz_listtit6">
-                    <a href="" target="_self">申报</a>
-                    <a href="" target="_blank">修改</a>
-                    <a href="" target="_blank">查看</a>
+                    <a href="" target="_self" th:if="${!item.hasApply}">申报</a>
+                    <a th:href="@{/item/updatemybanjian(dataId=${item.dataId})}" target="_blank" th:if="${!item.hasApply}" onclick="return confirm('要进行修改吗？')">改</a>
+                    <a th:href="@{/item/deletemybanjian(dataId=${item.dataId})}" onclick="return confirm('确认删除？')" th:if="${!item.hasApply}">删除</a>
+                    <a href="" target="_blank" th:if="${item.hasApply}">查看</a>
                 </div>
             </div>
         </div>
@@ -180,6 +181,11 @@ $(".lanmu_lasttime").click(function(){
         alert('你还未实名认证,不能办件,请先进行实名认证');
         return false;
     }
+}
+
+function delete() {
+
+
 }
 </script>
 </body>

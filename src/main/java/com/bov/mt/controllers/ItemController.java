@@ -205,6 +205,8 @@ public class ItemController {
         banJian.put("data",dataJSON);
         banJian.put("saveTime",new Date());
         banJian.put("dataId",dataId);
+        banJian.put("receiveNum","");
+        banJian.put("hasApply",false);
         template.insert(banJian,MongoTable.BANJIAN);
         return dataId;
     }
@@ -276,6 +278,26 @@ public class ItemController {
         }catch (IOException e) {
             logger.debug("=========输出材料图片失败========");
         }
+
+    }
+
+    @GetMapping("deletemybanjian")
+    public String deleteMyBanJian(@RequestParam("dataId") String dataId){
+
+        //在模拟浪潮系统中删除办件信息
+        lc.deleteData(dataId);
+        //删除本地库中数据
+        Query query = new Query();
+        query.addCriteria(Criteria.where("dataId").is(dataId));
+        template.remove(query,MongoTable.BANJIAN);
+        //删除办件的材料
+        template.remove(query,MongoTable.ITEMMETAIL);
+        return "redirect:/item/banjian";
+    }
+
+    @GetMapping("updatemybanjian")
+    public void updateMyBanJian(@RequestParam("dataId") String dataId){
+
 
     }
 }
