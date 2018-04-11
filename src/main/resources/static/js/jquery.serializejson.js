@@ -60,8 +60,8 @@
                 data:param,
                 contentType:"application/json",
                 success:function(data){
-                    // var url_ = "/item/metails?dataId="+data;
-                    // window.location.href = url_;
+                    var url_ = "/user/index";
+                    self.location.href = url_;
                 },
                 error:function (data) {
                     alert("服务器异常,请刷新当前页面");

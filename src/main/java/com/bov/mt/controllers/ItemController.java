@@ -336,6 +336,20 @@ public class ItemController {
     @ResponseBody
     public String doUpdateMyBanJian(@RequestBody String data){
 
+        JSONObject dataJSON = JSONObject.fromObject(data);
+        String dataId = dataJSON.getString("dataId");
+        dataJSON.remove("companyCode");
+        dataJSON.remove("itemCode");
+        dataJSON.remove("dataId");
+        //将新的办件更新到模拟浪潮系统中
+        lc.updateBanJian(dataId,data);
+        //获取旧的办件信息
+        Query query = new Query();
+        query.addCriteria(Criteria.where("dataId").is(dataId));
+        Document oldBanJian = template.findAndRemove(query,Document.class,MongoTable.BANJIAN);
+        oldBanJian.put("data",dataJSON);
+        oldBanJian.put("saveTime",new Date());
+        template.insert(oldBanJian,MongoTable.BANJIAN);
         return null;
     }
 }
