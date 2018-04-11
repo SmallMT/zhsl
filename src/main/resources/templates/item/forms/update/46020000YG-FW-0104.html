@@ -138,7 +138,7 @@ mso-bidi-language:AR-SA">申请事项</span></b></td>
                     <td class="cfFieldLabel" style="font-size: 12pt;">
                         <span style="font-family: 宋体, sans-serif; text-align: left;">恢复营业</span>&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3" style="font-size: 12pt;">&nbsp;事由：&nbsp;&nbsp;
-                        <textarea id="TingYeShiYou" name="TingYeShiYou" th:value="${myItemInfo.data.TingYeShiYou}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="TingYeShiYou" cf_modelitemname="停业事由" style="width: 604.797px;" cf_ismirrorfield="true" minheight="80" maxheight="200">
+                        <textarea id="TingYeShiYou" name="TingYeShiYou" th:text="${myItemInfo.data.TingYeShiYou}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="TingYeShiYou" cf_modelitemname="停业事由" style="width: 604.797px;" cf_ismirrorfield="true" minheight="80" maxheight="200">
 
                         </textarea>
                         <br>
@@ -194,7 +194,7 @@ EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">恢复营业</span><sp
                     <td class="cfFieldLabel">备注：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
                         <textarea id="BeiZhu" name="BeiZhu" th:text="${myItemInfo.data.BeiZhu}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="BeiZhu" cf_modelitemname="备注" minheight="80" maxheight="200">
-                        </textarea>&nbsp;&nbsp;</td>
+                        </textarea></td>
 
                 </tr>
                 <tr>

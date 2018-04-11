@@ -148,7 +148,7 @@ mso-bidi-language:AR-SA">申请事项</span></b></td>
                                         <input name="XieYeZheng" type="checkbox" value="许可证正本" class="cfCheckBox" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_checkbox" cf_modelitemid="XieYeSunHui" cf_modelitemname="歇业损毁">许可证正本
                                         <input name="XieYeZheng" type="checkbox" value="副本" class="cfCheckBox" cf_fieldlength="100" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_checkbox" cf_modelitemid="XieYeSunHui" cf_modelitemname="歇业损毁">副本
                                         <span>）</span>&nbsp;
-                        <textarea id="XieYeQingYou" name="XieYeQingYou" th:value="${myItemInfo.data.XieYeQingYou}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="XieYeShiYou" cf_modelitemname="歇业事由" cf_ismirrorfield="true" minheight="80" maxheight="200">
+                        <textarea id="XieYeQingYou" name="XieYeQingYou" th:text="${myItemInfo.data.XieYeQingYou}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="XieYeShiYou" cf_modelitemname="歇业事由" cf_ismirrorfield="true" minheight="80" maxheight="200">
 
                         </textarea>
                     </td>
@@ -198,7 +198,7 @@ mso-bidi-language:AR-SA">申请事项</span></b></td>
                     <td class="cfFieldLabel">备注：&nbsp;</td>
                     <td class="cfFieldInput" rowspan="1" colspan="3">
                         <textarea id="BeiZhu" name="BeiZhu" th:text="${myItemInfo.data.BeiZhu}" class="cfTextArea" cf_fieldlength="500" cf_elementtype="field" cf_iscreateid="1" cf_widgetid="cf_textarea" cf_modelitemid="BeiZhu" cf_modelitemname="备注" minheight="80" maxheight="200">
-                        </textarea>&nbsp;&nbsp;</td>
+                        </textarea></td>
 
                 </tr>
                     <tr>
