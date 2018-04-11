@@ -27,6 +27,7 @@ public class LangChaoService {
     private static String LC_LOADFILE = "http://localhost:9090/load?docid=";
     private static String LC_DELETEITEM = "http://localhost:9090/deleteitem?dataId=";
     private static String LC_UPDATEITEM = "http://localhost:9090/updateitem";
+    private static String LC_WEBAPPLY = "http://localhost:9090/webapply";
     @Value("${realName.filePath}")
     private String dirPath;
     private Logger logger = LoggerFactory.getLogger(LangChaoService.class);
@@ -54,6 +55,14 @@ public class LangChaoService {
         JSONObject params = JSONObject.fromObject(data);
         params.put("dataId",dataId);
         return post(LC_UPDATEITEM,params);
+    }
+
+    public String webapply(String itemCode,String data){
+        JSONObject params = new JSONObject();
+        params.put("itemCode",itemCode);
+        params.put("postdata",data);
+        JSONObject result = JSONObject.fromObject(post(LC_WEBAPPLY,params));
+        return result.getString("receiveNum");
     }
 
     //上传材料到模拟浪潮

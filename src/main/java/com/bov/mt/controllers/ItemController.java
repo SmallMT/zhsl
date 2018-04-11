@@ -352,4 +352,28 @@ public class ItemController {
         template.insert(oldBanJian,MongoTable.BANJIAN);
         return null;
     }
+
+    @GetMapping("webapply")
+    public String webapply(@RequestParam("dataId") String dataId,HttpServletRequest request){
+
+        //获取此dataId的表单数据
+        Query query = new Query();
+        query.addCriteria(Criteria.where("dataId").is(dataId));
+        Document myItemInfo = template.findOne(query,Document.class,MongoTable.BANJIAN);
+        JSONObject dataJSON = JSONObject.fromObject(myItemInfo.get("data"));
+        String itemCode = myItemInfo.getString("code");
+        //申报到模拟浪潮系统,拿回receiveNum
+        String receiveNum = lc.webapply(itemCode,dataJSON.toString());
+        String username = (String) request.getSession().getAttribute("username");
+        Document webapplyItem = new Document();
+        webapplyItem.put("username",username);
+        webapplyItem.put("receiveNum",receiveNum);
+        webapplyItem.put("postdata",dataJSON);
+        //更新我的办件信息
+        template.remove(query,MongoTable.BANJIAN);
+        myItemInfo.put("receiveNum",receiveNum);
+        myItemInfo.put("hasApply",true);
+        template.insert(myItemInfo,MongoTable.BANJIAN);
+        return "redirect:/item/banjian";
+    }
 }
