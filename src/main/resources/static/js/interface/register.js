@@ -66,8 +66,19 @@ function checkPhone(phone) {
     $("#aftercheckphone").html("");
     var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
     if (!reg.test(phone)) {
-        return ;
+        return;
     }
+    $.ajax({
+        type:"get",
+        url:"/user/checkphonehasused?phone="+phone,
+        success:function(data){
+            if (data == true){
+                $("#phoneResult").html("<font color='red'>该手机号已经被使用</font>");
+            }else {
+                $("#phoneResult").html("<font color='green'>通过</font>");
+            }
+        }
+    });
     phoneFlag = true;
 }
 

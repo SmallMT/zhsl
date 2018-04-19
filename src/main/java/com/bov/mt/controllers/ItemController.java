@@ -10,6 +10,7 @@ import com.bov.mt.entity.vm.UserCertificationInfoVM;
 import com.bov.mt.service.mongodb.MongoService;
 import com.bov.mt.utils.ItemUtil;
 import com.bov.mt.utils.LangChaoService;
+import com.bov.mt.utils.StringUtil;
 import com.bov.mt.utils.page.Page;
 import com.bov.mt.utils.page.PageFactory;
 import com.bov.mt.utils.uaa.UaaUtil;
@@ -31,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -350,9 +352,10 @@ public class ItemController {
         oldBanJian.put("data",dataJSON);
         oldBanJian.put("saveTime",new Date());
         template.insert(oldBanJian,MongoTable.BANJIAN);
-        return null;
+        return "ok";
     }
 
+    //办件申报
     @GetMapping("webapply")
     public String webapply(@RequestParam("dataId") String dataId,HttpServletRequest request){
 
@@ -369,11 +372,44 @@ public class ItemController {
         webapplyItem.put("username",username);
         webapplyItem.put("receiveNum",receiveNum);
         webapplyItem.put("postdata",dataJSON);
+        template.insert(webapplyItem,MongoTable.WEBAPPLYINFO);
         //更新我的办件信息
         template.remove(query,MongoTable.BANJIAN);
         myItemInfo.put("receiveNum",receiveNum);
+        myItemInfo.put("applyTime",new Date());
         myItemInfo.put("hasApply",true);
         template.insert(myItemInfo,MongoTable.BANJIAN);
         return "redirect:/item/banjian";
+    }
+
+    @GetMapping("ratedetail")
+    public String itemRateDetail(@RequestParam("dataId") String dataId,Model model){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("dataId").is(dataId));
+        Document item = template.findOne(query,Document.class,MongoTable.BANJIAN);
+        model.addAttribute("itemName",item.getString("name"));
+        List<JSONObject> states = new ArrayList<>();
+        JSONObject save = new JSONObject();
+        save.put("state","已保存");
+        save.put("time",itemUtil.dateToString(item.getDate("saveTime")));
+        save.put("option","已保存");
+        states.add(save);
+        boolean hasApply = item.getBoolean("hasApply");
+        if (hasApply) {
+            //已经申报
+            JSONObject apply = new JSONObject();
+            apply.put("state","已申报");
+            apply.put("time",itemUtil.dateToString(item.getDate("applyTime")));
+            apply.put("option","已申报");
+            states.add(apply);
+            JSONObject doing = new JSONObject();
+            doing.put("state","处理中");
+            doing.put("time",itemUtil.dateToString(new Date()));
+            doing.put("option","处理中");
+            states.add(doing);
+        }
+        model.addAttribute("items",states);
+        return "item/displaystate";
+
     }
 }

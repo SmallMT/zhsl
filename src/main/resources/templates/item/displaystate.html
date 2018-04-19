@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>事项状态</title>
+    <link th:href="@{~/css/cform.css}" rel="stylesheet">
+    <script th:src="@{~/js/jquery-1.11.1.js}"></script>
+    <script th:src="@{~/js/WdatePicker.js}"></script>
+<link id="bizLink" rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/js/skin.css">
+</head>
+<body>
+<div class="wrap4">
+		<div class="head_main">
+			<div class="logo"><a href="http://zwzx.sanya.gov.cn/"><img th:src="@{~/images/logo.png}"></a></div>
+			<div class="search">
+           </div>
+		</div>
+	</div>
+<div class="cfBody" id="cfBody" style="">
+    <script id="cfCustomedJs" th:inline="javascript">
+        CForm.on("afterLoadFormUI", function()
+        {
+            var bindControl = document.getElementById("ShenPiShiXiang");
+            var bindValue = CForm.getUrlParam("itemName");
+            if (bindValue)
+            {
+                bindValue = decodeURIComponent(decodeURIComponent(
+                    bindValue));
+                CForm.setFieldValue(bindControl, bindValue);
+            }
+        })
+    </script>
+    <p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><b><span style="font-size:15.0pt;line-height:
+150%;font-family:宋体;mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast" th:text="${itemName}"><span lang="EN-US"></span></span></b></p>
+    <p class="MsoNormal" align="center" style="text-align:center;line-height:150%"><b><span style="font-size:15.0pt;line-height:
+150%;font-family:宋体;mso-fareast-font-family:宋体;mso-fareast-theme-font:minor-fareast">状态表<span lang="EN-US"></span></span></b></p>
+
+        <table class="cfTable">
+            <colgroup>
+                <col class="cfFieldLabel" style="width:20%">
+                    <col class="cfFieldInput" style="width:30%">
+                        <col class="cfFieldLabel" style="width:20%">
+                            <col class="cfFieldInput" style="width:30%">
+            </colgroup>
+            <tbody style="font-size: 12pt;">
+                <tr>
+                    <td>状态</td>
+                    <td>时间</td>
+                    <td>意见</td>
+                </tr>
+                    <tr th:each="item : ${items}">
+                        <td th:text="${item.state}"></td>
+                        <td th:text="${item.time}"></td>
+                        <td th:text="${item.option}"></td>
+                    </tr>
+            </tbody>
+        </table>
+</div>
+</body>
+</html>

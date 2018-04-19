@@ -71,7 +71,6 @@
 </style>
 <body>
 <div class="bjbnt">
-  
             <ul class="menu">
                 <li class="lia"><a href="javascript:;">个人办件</a></li>
                 <li class="lia"><a href="javascript:;">企业办件</a></li>
@@ -126,13 +125,13 @@
                 <div class="grzz_listtit4" th:text="${item.gsj}"></div>
                 <div class="grzz_listtit5" th:text="${item.time}"></div>
                 <div class="grzz_listtit3">
-                    <a href="" target="_blank">查看详情</a>
+                    <a th:href="@{/item/ratedetail(dataId=${item.dataId})}" target="_blank">查看详情</a>
                 </div>
                 <div class="grzz_listtit6">
                     <a th:href="@{/item/webapply(dataId=${item.dataId})}" onclick="return confirm('确认申报？')" target="_self" th:if="${!item.hasApply}">申报</a>
                     <a th:href="@{/item/updatemybanjian(dataId=${item.dataId})}" target="_blank" th:if="${!item.hasApply}" onclick="return confirm('要进行修改吗？')">改</a>
                     <a th:href="@{/item/deletemybanjian(dataId=${item.dataId})}" onclick="return confirm('确认删除？')" th:if="${!item.hasApply}">删除</a>
-                    <a href="" target="_blank" th:if="${item.hasApply}">查看</a>
+                    <a href="" target="_blank" th:if="${item.hasApply}"></a>
                 </div>
             </div>
         </div>

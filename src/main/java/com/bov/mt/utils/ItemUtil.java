@@ -19,4 +19,10 @@ public class ItemUtil {
             item.setTime(time);
         }
     }
+
+    //处理单个时间
+    public String dateToString(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm");
+        return sdf.format(date);
+    }
 }

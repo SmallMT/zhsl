@@ -122,7 +122,7 @@ public class UserController {
         if (user.isPresent()) {
             //将用户信息放入session中
             request.getSession().setAttribute("user",user.get());
-            request.getSession().setAttribute("user",user.get().getLogin());
+            request.getSession().setAttribute("username",user.get().getLogin());
             request.getSession().setAttribute("token",token);
             //进入用户实名认证界面
             url = "redirect:/user/userauth?type=ING";
@@ -386,4 +386,9 @@ public class UserController {
         return "certification/showCompanyInfo";
     }
 
+    @GetMapping("checkphonehasused")
+    @ResponseBody
+    public boolean checkPhoneUsed(@RequestParam("phone") String phone){
+        return uaaUtils.checkPhoneHasUsed(phone);
+    }
 }

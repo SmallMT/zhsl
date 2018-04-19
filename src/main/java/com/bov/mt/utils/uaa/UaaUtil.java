@@ -42,7 +42,7 @@ public class UaaUtil {
     private static final String UAA_COMPANYLICENSEPHOTO = "http://localhost:8089/api/account/bindEnterprise/";
 //    http://localhost:8081/api/account/bindEnterprise?login.equals=lyt1025&creditCode.equals=444&state.equals=待验证
     private static final String UAA_GETBINDCOMPANYINFOBYCODE = "http://localhost:8089/api/account/bindEnterprise?";
-
+    private static final String UAA_CHECK_USER_PHONE = "http://localhost:9099/api/checkphonehasused?phone=";//查看手机号是否已经注册
     private Logger logger = LoggerFactory.getLogger(UaaUtil.class);
 
     @Autowired
@@ -352,6 +352,15 @@ public class UaaUtil {
         vm.setEnterpriserAddress(temp.getString("enterpriserAddress"));
         vm.setBusinessLicenseFile(temp.getString("businessLicenseFile"));
         return vm;
+    }
+
+    //判断手机号是否已经注册
+    public boolean checkPhoneHasUsed(String phone){
+        String url = UAA_CHECK_USER_PHONE + phone;
+        OAuthHeader header = new OAuthHeader();
+        Optional<HttpClientResult> result = postMan.getMethod(url,header);
+        String flag = result.get().getContent();
+        return "true".equalsIgnoreCase(flag);
     }
     //获取认证的图片
     public byte[] certificationPhoto(String token,String url){
