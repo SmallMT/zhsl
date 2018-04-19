@@ -24,8 +24,8 @@
         <div class="pr dw">
             <div class="Personal_login">
                 <ul class="menua">
-                    <li class="lia">个人用户登录</li>
-                    <li class="lia on">法人用户登录</li>
+                    <li class="lia">账号密码登录</li>
+                    <li class="lia on">手机快捷登录</li>
                 </ul>
                 <div class="mt80 form1" style="height:280px;display:block;">
                     <form th:action="@{/user/dologin}" method="post" class="form-horizontal col-sm-offset-1 col-md-offset-1" id="register_form">
@@ -54,23 +54,26 @@
                         <div class="col-sm-11 col-md-11">
                             <div class="form-group">
                                 <i class="fa fa-user fa-lg"></i>
-                                <input class="form-control required" type="text" placeholder="请输入用户名" name="username" autofocus="autofocus"/>
+                                <input class="form-control required" type="text" placeholder="请输入手机号码" name="phone" autofocus="autofocus"/>
                             </div>
-                            <div class="form-group">
-                                <i class="fa fa-lock fa-lg"></i>
-                                <input class="form-control required" type="password" placeholder="请输入密码" name="password"/>
-                            </div>
-                            <div class="form-group login_sign">
-                                <a class="fr" href="">忘记密码？</a>
+                            <div class="item col-xs-12">
+                                <span class="intelligent-label f-fl" style=""><b class="ftx04">*</b>验证码：</span>
+                                <div class="f-fl item-ifo">
+                                    <input type="text" maxlength="6" id="code"  name="code" class="txt03 f-r3 f-fl required" tabindex="4" onblur=""
+                                           style="float:left;width:167px" data-valid="isNonEmpty||isInt" data-error="验证码不能为空||请输入6位数字验证码" />
+                                    <input class="btn btn-info pull-left" value="获取验证码" id="btn"  onclick="" style="float:left;width:97px;height:35px"/>
+                                    <span class="ie8 icon-close close hide" style="right:130px"></span>
+                                    <label class="icon-sucessfill blank hide"></label>
+                                    <label class="focus">
+                                        <!--<span id="interfaceCode">请输入6位验证码</span>-->
+                                        <!--<span id="aftercheckcode" th:if="${#fields.hasErrors('code')}">-->
+                                        <!--<font color="red" th:errors="*{code}"></font>-->
+                                    </span>
+                                    </label>
+                                </div>
                             </div>
                             <div class="mt30 form-group login_sign">
                                 <input type="submit" class="btn btn-info pull-left" value="登录"/>
-                            </div>
-                            <div class="form-group login_sign">
-                                <input type="submit" class="btn btn-info pull-left" value="法人数字证书登录"/>
-                            </div>
-                            <div class="form-group login_sign">
-                                <a class="fr" href="#">数字证书登录遇到问题？</a>
                             </div>
                         </div>
                     </form>
