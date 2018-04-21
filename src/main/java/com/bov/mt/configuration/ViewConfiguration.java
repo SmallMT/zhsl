@@ -3,13 +3,12 @@ package com.bov.mt.configuration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 @Configuration
-public class DefaultView extends WebMvcConfigurerAdapter{
-
+public class ViewConfiguration extends WebMvcConfigurationSupport {
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    protected void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/user/login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);

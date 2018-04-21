@@ -1,5 +1,6 @@
 package com.bov.mt.controllers;
 
+import com.bov.mt.constant.AdminInfo;
 import com.bov.mt.constant.Mark;
 import com.bov.mt.constant.RegexString;
 import com.bov.mt.entity.Token;
@@ -8,6 +9,7 @@ import com.bov.mt.entity.result.CertificateUserResult;
 import com.bov.mt.entity.result.RegisterResult;
 import com.bov.mt.entity.result.SendPhoneResult;
 import com.bov.mt.entity.vm.*;
+import com.bov.mt.utils.MessageCode;
 import com.bov.mt.utils.StringUtil;
 import com.bov.mt.utils.uaa.UaaUtil;
 import net.sf.json.JSONObject;
@@ -38,9 +40,13 @@ public class UserController {
     @Autowired
     private UaaUtil uaaUtils;
 
+    @Autowired
+    private MessageCode messageCode;
+
     //用户登录页面
     @GetMapping("login")
-    public String login(){
+    public String login(Model model){
+        model.addAttribute("msg","");
         return "user/login";
     }
 
@@ -69,7 +75,6 @@ public class UserController {
     @GetMapping("index")
     public String index(){
         //初始化用户信息
-
         return "index";
     }
 
@@ -386,9 +391,44 @@ public class UserController {
         return "certification/showCompanyInfo";
     }
 
+    //检测手机号是否绑定了账号
     @GetMapping("checkphonehasused")
     @ResponseBody
     public boolean checkPhoneUsed(@RequestParam("phone") String phone){
         return uaaUtils.checkPhoneHasUsed(phone);
     }
+
+    //用户使用手机号登录
+    @PostMapping("loginbyphone")
+    public String loginByPhone(@RequestParam("phone") String phone,
+                               @RequestParam("code") String code,HttpServletRequest request,Model model){
+
+        boolean loginFlag = messageCode.verifyCode(phone,code);
+        if (!loginFlag) {
+            model.addAttribute("msg","验证码验证失败");
+            return "user/login";
+        }
+        //首先根据手机号获取绑定的用户名
+        String username = uaaUtils.findUsernameByPhone(phone);
+        //通过验证,使用管理员身份证获取token值
+        Token tokens = uaaUtils.getTokenByUsernameAndPwd(AdminInfo.ADMINNAME,AdminInfo.ADMINPWD);
+        String token = tokens.getToken();
+        //初始化用户信息
+        Optional<User> optional = uaaUtils.getUserInfo(token,username);
+        List<BindingCompanyInfoVM> companyInfoVMS = uaaUtils.bindingCompanyInfo(token, username);
+        //初始化用户信息
+        request.getSession().setAttribute("token",token);
+        request.getSession().setAttribute("user",optional.get());
+        request.getSession().setAttribute("username",optional.get().getLogin());
+        request.getSession().setAttribute("companyInfos",companyInfoVMS);
+        return "redirect:/user/index";
+    }
+
+
+    @GetMapping("logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/user/login";
+    }
+
 }
