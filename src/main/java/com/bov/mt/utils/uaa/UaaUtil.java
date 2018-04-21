@@ -42,6 +42,7 @@ public class UaaUtil {
     private static final String UAA_COMPANYLICENSEPHOTO = "http://localhost:8089/api/account/bindEnterprise/";
 //    http://localhost:8081/api/account/bindEnterprise?login.equals=lyt1025&creditCode.equals=444&state.equals=待验证
     private static final String UAA_GETBINDCOMPANYINFOBYCODE = "http://localhost:8089/api/account/bindEnterprise?";
+    private static final String UAA_CHANGE_PASSWORD = "http://localhost:8089/api/account/change-password";
     private static final String UAA_CHECK_USER_PHONE = "http://localhost:9099/api/checkphonehasused?phone=";//查看手机号是否已经注册
     private static final String UAA_FIND_USERNAME_BY_PHONE = "http://localhost:9099/api/findusername?phone=";//根据手机号获取用户名
     private Logger logger = LoggerFactory.getLogger(UaaUtil.class);
@@ -362,6 +363,20 @@ public class UaaUtil {
         Optional<HttpClientResult> result = postMan.getMethod(url,header);
         String flag = result.get().getContent();
         return "true".equalsIgnoreCase(flag);
+    }
+
+    //修改密码
+    public void changePassword(String token,String username,String password){
+        HttpClientResult result = null;
+        OAuthHeader headers = new OAuthHeader();
+        headers.setAuthorization(token);
+        headers.setAccept("application/json");
+        headers.setContentType("application/json");
+        JSONObject args = new JSONObject();
+        args.put("login",username);
+        args.put("password",password);
+        Optional<HttpClientResult> optional = postMan.postMethod(UAA_CHANGE_PASSWORD,headers,args);
+        result = optional.get();
     }
     //根据手机号获取用户名
     public String findUsernameByPhone(String phone){

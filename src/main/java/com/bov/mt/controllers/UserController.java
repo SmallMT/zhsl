@@ -442,7 +442,7 @@ public class UserController {
     }
 
     @PostMapping("dofindpassword")
-    public String doFindPassword(FindPasswordVM findPasswordVM,RedirectAttributes redirectAttributes){
+    public String doFindPassword(FindPasswordVM findPasswordVM,RedirectAttributes redirectAttributes,HttpServletRequest request){
         //校验短信验证码
         String phone = findPasswordVM.getPhone();
         String code = findPasswordVM.getCode();
@@ -452,8 +452,12 @@ public class UserController {
             return "redirect:/user/findpwd";
         }
         //修改密码
-
-        return null;
+        String username = findPasswordVM.getUsername();
+        String newPassword = findPasswordVM.getNewPassword();
+        Token tokens = uaaUtils.getTokenByUsernameAndPwd(AdminInfo.ADMINNAME,AdminInfo.ADMINPWD);
+        String token = tokens.getToken();
+        uaaUtils.changePassword(token,username,newPassword);
+        return "redirect:/user/login";
     }
 
     //判断用户名是否存在
