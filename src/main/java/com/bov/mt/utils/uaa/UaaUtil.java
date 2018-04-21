@@ -370,6 +370,8 @@ public class UaaUtil {
         Optional<HttpClientResult> result = postMan.getMethod(url,header);
         return result.get().getContent();
     }
+
+
     //获取认证的图片
     public byte[] certificationPhoto(String token,String url){
         return postMan.getImage(token,url);

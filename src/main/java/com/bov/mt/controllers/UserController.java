@@ -425,10 +425,43 @@ public class UserController {
     }
 
 
+    //退出
     @GetMapping("logout")
     public String logout(HttpServletRequest request){
         request.getSession().invalidate();
         return "redirect:/user/login";
     }
+
+    //找回密码页面
+    @GetMapping("findpwd")
+    public String findPassword(Model model){
+        if (!model.containsAttribute("msg")) {
+            model.addAttribute("msg","");
+        }
+        return "user/findpassword";
+    }
+
+    @PostMapping("dofindpassword")
+    public String doFindPassword(FindPasswordVM findPasswordVM,RedirectAttributes redirectAttributes){
+        //校验短信验证码
+        String phone = findPasswordVM.getPhone();
+        String code = findPasswordVM.getCode();
+        boolean flag = messageCode.verifyCode(phone,code);
+        if (!flag) {
+            redirectAttributes.addFlashAttribute("msg","短信验证失败");
+            return "redirect:/user/findpwd";
+        }
+        //修改密码
+
+        return null;
+    }
+
+    //判断用户名是否存在
+    @GetMapping("usernameisexist")
+    @ResponseBody
+    public boolean usernameIsExist(@RequestParam("username") String username){
+        return uaaUtils.usernameIsExist(username);
+    }
+
 
 }
